@@ -1,13 +1,14 @@
 import React from 'react';
 import Glossary from './Glossary';
 import Form from './Form';
+import SearchBar from './SearchBar';
 
 const App = () => {
 	return (
 		<>
-			<h1>Hello, World</h1>
-			<Glossary />
+			<SearchBar />
 			<Form />
+			<Glossary />
 		</>
 	)
 };

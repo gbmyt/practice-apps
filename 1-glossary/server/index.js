@@ -6,6 +6,7 @@ const app = express();
 var port = 3000;
 
 const save = require('./db').save;
+const update = require('./db').update;
 
 // app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -25,6 +26,18 @@ app.post('/vocab', (req, res) => {
 			res.status(500).send('Error Saving New Term');
 		} else {
 			res.status(201).send('Saved!');
+		}
+	});
+});
+
+app.post('/vocab/update', (req, res) => {
+	// console.log('Testing Body', req.body);
+
+	update(req.body.updatedTerm, (err) => {
+		if (err) {
+			res.status(500).send('Error Updating Term');
+		} else {
+			res.status(202).send('Updated!');
 		}
 	});
 });

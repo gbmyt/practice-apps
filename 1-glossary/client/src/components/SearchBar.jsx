@@ -7,7 +7,7 @@ const SearchBar = () => {
 		setSearchTerm(e.target.value);
 	};
 
-	// TODO: Make this function actually search the db and return searched term
+	// To-Do: searching a term should filter existing glossary list
 	const search = (e) => {
 		e.preventDefault();
 		console.log('Searching:', searchTerm);

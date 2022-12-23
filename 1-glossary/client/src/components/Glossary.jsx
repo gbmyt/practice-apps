@@ -1,15 +1,17 @@
 import React from 'react';
+import GlossaryItem from './GlossaryItem';
 
+// To-Do: Dynamically Render GlossaryItems (instead of one-by-one)
 const Glossary = () => {
 	return (
 		<div className="glossary">
-			<h2>Glossary List</h2>
+			<h2>Glossary</h2>
 			<ul>
-				<li>Item</li>
-				<li>Item</li>
-				<li>Item</li>
-				<li>Item</li>
-				<li>Item</li>
+				<GlossaryItem/>
+				<GlossaryItem/>
+				<GlossaryItem/>
+				<GlossaryItem/>
+				<GlossaryItem/>
 			</ul>
 		</div>
 	)
