@@ -1,14 +1,6 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const Word = require('./db');
-
-// mongoose.connect('mongodb://localhost/glossary', (err) => {
-// 	if (err) {
-// 		console.log("Connection Error: ", err);
-// 	} else {
-// 		console.log("Connection Open");
-// 	}
-// });
+const Word = require('./db').word;
 
 const seedWords = [
 	{
