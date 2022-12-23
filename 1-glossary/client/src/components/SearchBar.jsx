@@ -7,6 +7,7 @@ const SearchBar = () => {
 		setSearchTerm(e.target.value);
 	};
 
+	// TODO: Make this function actually search the db and return searched term
 	const search = (e) => {
 		e.preventDefault();
 		console.log('Searching:', searchTerm);
@@ -14,7 +15,7 @@ const SearchBar = () => {
 	};
 
 	return (
-		<div>
+		<div className="form">
 			<form id="searchForm" >
 				<label htmlFor="search">Search:</label>
 				<input

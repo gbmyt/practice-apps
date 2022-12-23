@@ -34,7 +34,7 @@ const Word = mongoose.model('Word', wordSchema);
 // =========================
 // 				DB METHODS
 // =========================
-let save = async (term) => {
+let save = async (term, cb) => {
 	console.log('Saving word...');
 	const newWord = new Word ({
 		name: term.name,
@@ -44,6 +44,7 @@ let save = async (term) => {
 	await newWord.save();
 	const testWord = await Word.findOne({ name: term.name });
 	console.log('Saved to db!', testWord);
+	cb();
 };
 
 module.exports.word = Word;
