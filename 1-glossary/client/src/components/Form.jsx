@@ -19,7 +19,7 @@ const Form = () => {
 
 	return (
 		<div className='addForm'>
-			<h2>Add New Term:</h2>
+			<h2>Add New Word</h2>
 			<form className="flex-parent" id="addTermForm" onSubmit={handleSubmit}>
 				<div className="flex-child">
 					<label htmlFor="term">Word</label>

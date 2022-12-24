@@ -9,37 +9,53 @@ const dbSave = require('./db').dbSave;
 const dbUpdate = require('./db').dbUpdate;
 const dbDelete = require('./db').dbDelete;
 const getWords = require('./db').getWords;
+const getWord = require('./db').getWord;
 
 // app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.get('/vocab', async (req, res) => {
-	// =======================================================
-	// 			TO-DO: Sort by Created Date Descending?
-	// =======================================================
-	const words = await getWords();
-	res.status(200).send(words);
+app.get('/glossary', (req, res) => {
+	getWords((err, words) => {
+		if (err) {
+			res.status(res.statusCode).send(err);
+		} else {
+			res.status(res.statusCode).send(words);
+		}
+	});
 })
 
-app.post('/create', async (req, res) => {
-	// console.log('Testing Body', req.body);
+app.get('/:term', (req, res) => {
+	console.log('inside getWord Req', req.params.term);
 
-	await dbSave(req.body.newTerm, (err) => {
+	getWord(req.params.term, (err, word) => {
 		if (err) {
-			res.status(500).send('Error Saving New Term');
+			console.log('Theres an error', err);
+			res.status(res.statusCode).send(err);
 		} else {
-			res.status(201).send('Saved!');
+			console.log('Word found', word);
+			res.status(res.statusCode).send(word);
 		}
 	});
 });
 
-app.post('/update', async (req, res) => {
+app.post('/create', (req, res) => {
+	dbSave(req.body.newTerm, (err) => {
+		if (err) {
+			console.error(err);
+			res.status(res.statusCode).send('Error Saving New Term');
+		} else {
+			res.status(res.statusCode).send('Saved!');
+		}
+	});
+});
+
+app.post('/update', (req, res) => {
 	// console.log('Testing Body', req.body);
 
 	// Test update
-	// await dbUpdate({
+	// dbUpdate({
 	// 	name: 'anachronistic',
 	// 	definition: 'belonging or appropriate to an earlier period\, especially so as to seem conspicuously old-fashioned.',
 	// 	example: 'she is rebelling against the anachronistic morality of her parents'
@@ -50,21 +66,21 @@ app.post('/update', async (req, res) => {
 	// ========================================================================
 	dbUpdate(req.body.updatedTerm, (err) => {
 		if (err) {
-			res.status(500).send('Error Updating Term');
+			console.error(err);
+			res.status(res.statusCode).send('Error Updating Term');
 		} else {
-			res.status(202).send('Updated!');
+			res.status(res.statusCode).send('Updated!');
 		}
 	});
-
-	res.status(201).send('Updated!');
 });
 
-app.post('/delete/:id', async (req, res) => {
-	await dbDelete(req.params.id, (err) => {
+app.post('/delete/:id', (req, res) => {
+	dbDelete(req.params.id, (err) => {
 		if (err) {
-			console.log(err);
+			console.error(err);
+			res.status(res.statusCode).send(err);
 		} else {
-			res.status(200).send('Done Deleting');
+			res.status(res.statusCode).send('Done Deleting');
 		}
 	});
 });

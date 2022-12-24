@@ -6,23 +6,23 @@ import Form from './Form';
 import SearchBar from './SearchBar';
 
 const App = () => {
-	const [vocabWords, setVocabWords] = useState({});
+	const [glossary, setGlossary] = useState({});
 
 	useEffect(() => {
 		(async () => {
-			const words = await axios.get('/vocab');
-			setVocabWords(words.data);
+			const words = await axios.get('/glossary');
+			setGlossary(words.data);
 		})();
 
 		// Cleanup ToDo?
 		return () => {};
-	}, [vocabWords]);
+	}, [glossary]);
 
 	return (
 		<>
 			<SearchBar />
 			<Form />
-			<Glossary words={vocabWords} />
+			<Glossary words={glossary} />
 		</>
 	)
 };

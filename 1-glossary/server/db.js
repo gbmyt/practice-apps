@@ -43,37 +43,69 @@ const Word = mongoose.model('Word', wordSchema);
 // =========================
 // 				DB METHODS
 // =========================
-let getWords = async () => {
-	const words = await Word.find({}).sort({ created_at: -1 });
-	return words;
+let getWords = async (cb) => {
+	// Testing Try/Catch Error-Handling
+	try {
+		const words = await Word.find({}).sort({ created_at: -1 });
+		cb(words);
+  } catch (e) {
+    console.error('Caught Error:', e.name + "\n" + e.message);
+  }
+};
+
+let getWord = async (term, cb) => {
+	try {
+		const word = await Word.findOne({ name: term });
+		cb(word);
+  } catch (e) {
+    console.error('Caught Error:', e.name + "\n" + e.message);
+  }
 };
 
 let dbSave = async (term, cb) => {
 	console.log('Saving word...');
+
 	const newWord = new Word ({
 		name: term.name,
 		definition: term.definition,
 		example: term.example || 'An example sentence was not provided.'
-	})
-	await newWord.save();
-	console.log('Saved to database!');
-	cb();
+	});
+
+	try {
+    await newWord.save()
+		console.log('Saved to database!');
+  } catch (e) {
+		console.error('Caught Error:', e.name + "\n" + e.message);
+  } finally {
+		cb();
+  }
 };
 
-let dbUpdate = async (term, cb) => {
-	let word = await Word.findOne({ name: term.name });
-
-	word.name = term.name;
-	word.definition = term.definition;
-	word.example = term.example;
-
-	await word.save();
-	console.log('Updated!');
+let dbUpdate = (term, cb) => {
+	// Testing Promise Error-Handling
+	Word.findOne({ name: term.name })
+		.then(word => {
+			word.name = term.name;
+			word.definition = term.definition;
+			word.example = term.example;
+			word.save();
+		})
+		.then(() => {
+			console.log('Updated!');
+		})
+		.catch(err => {
+			console.error('Caught Error:', e.name + "\n" + e.message);
+		});
 };
 
 let dbDelete = async (id, cb) => {
-	await Word.deleteOne({ _id: id });
-	cb();
+	try {
+		await Word.deleteOne({ _id: id });
+  } catch (e) {
+		console.error('Caught Error:', e.name + "\n" + e.message);
+  } finally {
+		cb();
+  }
 };
 
 module.exports.word = Word;
@@ -81,3 +113,4 @@ module.exports.dbSave = dbSave;
 module.exports.dbUpdate = dbUpdate;
 module.exports.dbDelete = dbDelete;
 module.exports.getWords = getWords;
+module.exports.getWord = getWord;

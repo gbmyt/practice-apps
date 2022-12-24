@@ -9,17 +9,24 @@ import axios from 'axios';
 // =============================================
 const GlossaryItem = ({ word }) => {
 
-	const deleteWord = (e) => {
-		console.log('inside glossary item delete func');
-		// document.getElementById("searchFormInput").value = '';
-		axios.post(`/delete/${word._id}`);
+	const deleteWord = async () => {
+		await axios.post(`/delete/${word._id}`);
+	};
+
+	const updateWord = async () => {
+		console.log('Inside Update Func');
+		// await axios.post(`/update/${word._id}`);
 	};
 
 	return (
 		<div className="glossary-item flex-parent">
-			<li><span>{word.name}</span>: {word.definition}</li>
+			<li>
+				<span className="bold">{word.name}</span>: {word.definition}
+				<br />
+				<span className="bold">Example: </span> {word.example}
+			</li>
 			<div>
-				<button>Edit</button>
+				<button onClick={updateWord}>Edit</button>
 				<button onClick={deleteWord}>Delete</button>
 			</div>
 		</div>

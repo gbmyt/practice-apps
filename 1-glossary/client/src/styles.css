@@ -90,9 +90,14 @@ ul {
 .glossary-item,
 #searchForm {
   margin: 0 auto;
-  text-align: center;
   max-width: 1000px;
   border-radius: 15px;
+}
+
+.addForm,
+.glossary > h2,
+#searchForm {
+  text-align: center;
 }
 
 /*
@@ -168,10 +173,10 @@ form > label {
   border: 1px solid silver;
 }
 
-li > span {
-  font-weight: bold;
-}
-
 li {
   font-style: italic;
+}
+
+li > span.bold {
+  font-weight: bold;
 }
