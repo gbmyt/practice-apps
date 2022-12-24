@@ -4,6 +4,7 @@ import React from 'react';
 //                  TO-DOs:
 // 	onEdit function to update existing items
 // 		onDelete function to delete from db
+// Add word type to glossary item (noun, adj, etc)
 // =============================================
 const GlossaryItem = ({ word }) => {
 

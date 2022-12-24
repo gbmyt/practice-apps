@@ -16,7 +16,7 @@ const App = () => {
 
 		// Cleanup ToDo?
 		return () => {};
-	}, []);
+	}, [vocabWords]);
 
 	return (
 		<>

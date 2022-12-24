@@ -27,7 +27,15 @@ const wordSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	example: String
+	example: String,
+	created_at: {
+		type: Date,
+		default: Date.now
+	},
+	updated_at: {
+		type: Date,
+		default: Date.now
+	}
 });
 
 const Word = mongoose.model('Word', wordSchema);
@@ -36,7 +44,7 @@ const Word = mongoose.model('Word', wordSchema);
 // 				DB METHODS
 // =========================
 let getWords = async () => {
-	const words = await Word.find({});
+	const words = await Word.find({}).sort({ created_at: -1 });
 	return words;
 };
 
