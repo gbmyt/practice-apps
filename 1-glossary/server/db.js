@@ -48,16 +48,15 @@ let save = async (term, cb) => {
 	cb();
 };
 
-let update = async (term) => {
-	let word = await Word.findOne({ name: term.name }) // make unique
+let update = async (term, cb) => {
+	let word = await Word.findOne({ name: term.name });
 
-	word.name: term.name,
-	word.definition: term.definition,
-	word.example: term.example || 'An example sentence was not provided.'
+	word.name = term.name;
+	word.definition = term.definition;
+	word.example = term.example;
 
 	await word.save();
-	console.log('Updated', Word.findOne({ name: word.name }));
-	}
+	console.log('Updated!');
 };
 
 module.exports.word = Word;

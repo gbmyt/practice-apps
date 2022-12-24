@@ -30,16 +30,25 @@ app.post('/vocab', (req, res) => {
 	});
 });
 
-app.post('/vocab/update', (req, res) => {
+app.post('/vocab/update', async (req, res) => {
 	// console.log('Testing Body', req.body);
 
-	update(req.body.updatedTerm, (err) => {
-		if (err) {
-			res.status(500).send('Error Updating Term');
-		} else {
-			res.status(202).send('Updated!');
-		}
-	});
+	// Test update
+	// await update({
+	// 	name: 'anachronistic',
+	// 	definition: 'belonging or appropriate to an earlier period\, especially so as to seem conspicuously old-fashioned.',
+	// 	example: 'she is rebelling against the anachronistic morality of her parents'
+	// });
+
+	// update(req.body.updatedTerm, (err) => {
+	// 	if (err) {
+	// 		res.status(500).send('Error Updating Term');
+	// 	} else {
+	// 		res.status(202).send('Updated!');
+	// 	}
+	// });
+
+	res.status(201).send('Updated!');
 });
 
 app.listen(port, () => {
