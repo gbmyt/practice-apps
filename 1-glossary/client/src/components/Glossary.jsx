@@ -1,17 +1,12 @@
 import React from 'react';
 import GlossaryItem from './GlossaryItem';
 
-// To-Do: Dynamically Render GlossaryItems (instead of one-by-one)
-const Glossary = () => {
+const Glossary = ({ words }) => {
 	return (
 		<div className="glossary">
 			<h2>Glossary</h2>
 			<ul>
-				<GlossaryItem/>
-				<GlossaryItem/>
-				<GlossaryItem/>
-				<GlossaryItem/>
-				<GlossaryItem/>
+				{ words.length ? words.map(term => <GlossaryItem word={term} key={term.name} />) : <></> }
 			</ul>
 		</div>
 	)

@@ -7,7 +7,9 @@ const SearchBar = () => {
 		setSearchTerm(e.target.value);
 	};
 
-	// To-Do: searching a term should filter existing glossary list
+	// ==================================================================
+	//   TO-DO: Searching a term should filter existing glossary list
+	// ==================================================================
 	const search = (e) => {
 		e.preventDefault();
 		console.log('Searching:', searchTerm);

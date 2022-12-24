@@ -7,14 +7,14 @@ const Form = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		let newVocabTerm = {
+		let newTerm = {
 			name: e.target.querySelector('#addTermWordInput').value || 'Default Name',
 			definition: e.target.querySelector('#addTermDefInput').value || 'Default Def',
 			example: e.target.querySelector('#addTermExInput').value || 'Default Example'
 		};
 
-		console.log('Adding Term:', newVocabTerm);
-		await axios.post('/vocab', { newVocabTerm });
+		console.log('Adding Term:', newTerm);
+		await axios.post('/create', { newTerm });
 	};
 
 	return (
