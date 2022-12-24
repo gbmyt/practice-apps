@@ -73,42 +73,89 @@ Search bar styling (flex)
 Glossary Item styling (flex)
 */
 
+/*
+============================
+         Universal
+============================
+*/
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.addForm,
+.glossary > h2,
+.glossary-item,
+#searchForm {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 1000px;
+  border-radius: 15px;
+}
+
+/*
+============================
+         Flexbox
+============================
+*/
 .flex-parent {
   display: flex;
 }
 
-.flex-child {
-
-}
-
-.form, .glossary {
-  margin: 2rem 1rem;
-}
-
-.form input {
-  margin: 1rem;
-}
-
-.glossary > h2 {
-  margin-bottom: 2rem;
+/* .flex-child {
+  justify-content: center;
+  align-content: center;
   text-align: center;
+} */
+
+/*
+============================
+      SearchBar Styles
+============================
+*/
+
+#searchForm {
+  margin-bottom: 1rem;
 }
 
-.addForm {
-  margin: 0 auto;
-  max-width: 1000px;
-  min-height: 200px;
-  text-align: center;
+/*
+============================
+      Add Form Styles
+============================
+*/
+
+.addForm > h2 {
+  margin-bottom: .5rem;
+}
+
+input {
+  margin: .2rem .75rem;
+  border-radius: 25px;
 }
 
 form > label {
-  display: block;
+  /* display: block; */
   margin-top: .5rem;
 }
 
+/*
+============================
+      Glossary Styles
+============================
+*/
+
+.glossary > h2 {
+  margin-bottom: 2rem;
+}
+
+.glossary {
+  margin-top: 2rem;
+  /* border: 1px solid magenta; */
+}
+
 .glossary-item, .addForm {
-  border: 1px solid silver;
-  border-radius: 15px;
   padding: 1rem;
 }
 
@@ -116,6 +163,7 @@ form > label {
   margin-bottom: 1rem;
   justify-content: space-between;
   flex-wrap: wrap;
+  border: 1px solid silver;
 }
 
 li > span {
@@ -124,5 +172,4 @@ li > span {
 
 li {
   font-style: italic;
-  list-style: none;
 }
