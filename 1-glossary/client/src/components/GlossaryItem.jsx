@@ -13,9 +13,11 @@ const GlossaryItem = ({ word }) => {
 
 	return (
 		<div className="glossary-item">
-			<li>{word.name}: <span>{word.definition}</span></li>
-			<button>Edit</button>
-			<button onClick={deleteWord}>Delete</button>
+			<li><span>{word.name}</span>: {word.definition}</li>
+			<div>
+				<button>Edit</button>
+				<button onClick={deleteWord}>Delete</button>
+			</div>
 		</div>
 	)
 };
