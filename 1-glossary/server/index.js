@@ -27,16 +27,9 @@ app.get('/glossary', (req, res) => {
 })
 
 app.get('/:term', (req, res) => {
-	console.log('inside getWord Req', req.params.term);
-
-	getWord(req.params.term, (err, word) => {
-		if (err) {
-			console.log('Theres an error', err);
-			res.status(res.statusCode).send(err);
-		} else {
-			console.log('Word found', word);
-			res.status(res.statusCode).send(word);
-		}
+	getWord(req.params.term, (word) => {
+		// console.log('Word found', word);
+		res.status(res.statusCode).send(word);
 	});
 });
 

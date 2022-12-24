@@ -7,6 +7,7 @@ import SearchBar from './SearchBar';
 
 const App = () => {
 	const [glossary, setGlossary] = useState({});
+	const [searchTerm, setSearchTerm] = React.useState('');
 
 	useEffect(() => {
 		(async () => {
@@ -16,11 +17,21 @@ const App = () => {
 
 		// Cleanup ToDo?
 		return () => {};
-	}, [glossary]);
+	}, []);
+
+	const search = async () => {
+		console.log('Searching:', searchTerm);
+		const word = await axios.get(`/${searchTerm}`);
+		console.log('word', word.data);
+
+		// This doesn't work
+		setGlossary(word.data);
+		console.log(glossary);
+	};
 
 	return (
 		<>
-			<SearchBar />
+			<SearchBar onSearch={search} setTerm={setSearchTerm}/>
 			<Form />
 			<Glossary words={glossary} />
 		</>

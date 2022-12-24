@@ -1,21 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
-const SearchBar = () => {
-	const [searchTerm, setSearchTerm] = React.useState('');
+const SearchBar = props => {
+	// const [searchTerm, setSearchTerm] = React.useState('');
 
 	const setTerm = (e) => {
-		setSearchTerm(e.target.value);
+		props.setTerm(e.target.value);
 	};
 
 	// ==================================================================
 	//   TO-DO: Searching a term should filter existing glossary list
 	// ==================================================================
-	const search = async (e) => {
+	const search = (e) => {
 		e.preventDefault();
-		console.log('Searching:', searchTerm);
-		setSearchTerm('');
-		await axios.get(`/${searchTerm}`);
+		props.onSearch();
 	};
 
 	return (
@@ -27,7 +25,7 @@ const SearchBar = () => {
 					name="search"
 					id="searchFormInput"
 					placeholder="Type something..."
-					value={searchTerm}
+					value={props.searchTerm}
 					onChange={setTerm}
 				/>
 			<button type="submit" onClick={search}>Search</button>
