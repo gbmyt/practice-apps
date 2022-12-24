@@ -71,8 +71,8 @@ let dbUpdate = async (term, cb) => {
 	console.log('Updated!');
 };
 
-let dbDelete = async (term, cb) => {
-	await Word.deleteOne(term);
+let dbDelete = async (id, cb) => {
+	await Word.deleteOne({ _id: id });
 	cb();
 };
 

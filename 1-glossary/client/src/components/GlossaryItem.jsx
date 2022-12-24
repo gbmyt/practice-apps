@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 // =============================================
 //                  TO-DOs:
@@ -8,8 +9,10 @@ import React from 'react';
 // =============================================
 const GlossaryItem = ({ word }) => {
 
-	const deleteWord = () => {
+	const deleteWord = (e) => {
 		console.log('inside glossary item delete func');
+		// document.getElementById("searchFormInput").value = '';
+		axios.post(`/delete/${word._id}`);
 	};
 
 	return (

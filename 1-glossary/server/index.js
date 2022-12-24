@@ -59,11 +59,8 @@ app.post('/update', async (req, res) => {
 	res.status(201).send('Updated!');
 });
 
-app.post('/delete', async (req, res) => {
-	// ========================================================================
-	// 			TO-DO: Implement delete func in React Glossary List Item 'Delete'
-	// ========================================================================
-	await dbDelete(req.body.deleteWord, (err) => {
+app.post('/delete/:id', async (req, res) => {
+	await dbDelete(req.params.id, (err) => {
 		if (err) {
 			console.log(err);
 		} else {

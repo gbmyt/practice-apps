@@ -6,7 +6,7 @@ const Glossary = ({ words }) => {
 		<div className="glossary">
 			<h2>Glossary</h2>
 			<ul>
-				{ words.length ? words.map(term => <GlossaryItem word={term} key={term.name} />) : <></> }
+				{ words.length ? words.map(term => <GlossaryItem word={term} key={term._id} />) : <></> }
 			</ul>
 		</div>
 	)
