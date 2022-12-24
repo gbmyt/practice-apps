@@ -35,7 +35,12 @@ const Word = mongoose.model('Word', wordSchema);
 // =========================
 // 				DB METHODS
 // =========================
-let save = async (term, cb) => {
+let getWords = async () => {
+	const words = await Word.find({});
+	return words;
+};
+
+let dbSave = async (term, cb) => {
 	console.log('Saving word...');
 	const newWord = new Word ({
 		name: term.name,
@@ -43,12 +48,11 @@ let save = async (term, cb) => {
 		example: term.example || 'An example sentence was not provided.'
 	})
 	await newWord.save();
-	const testWord = await Word.findOne({ name: term.name });
-	console.log('Saved to db!', testWord);
+	console.log('Saved to database!');
 	cb();
 };
 
-let update = async (term, cb) => {
+let dbUpdate = async (term, cb) => {
 	let word = await Word.findOne({ name: term.name });
 
 	word.name = term.name;
@@ -59,6 +63,13 @@ let update = async (term, cb) => {
 	console.log('Updated!');
 };
 
+let dbDelete = async (term, cb) => {
+	await Word.deleteOne(term);
+	cb();
+};
+
 module.exports.word = Word;
-module.exports.save = save;
-module.exports.update = update;
+module.exports.dbSave = dbSave;
+module.exports.dbUpdate = dbUpdate;
+module.exports.dbDelete = dbDelete;
+module.exports.getWords = getWords;
