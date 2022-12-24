@@ -73,6 +73,14 @@ Search bar styling (flex)
 Glossary Item styling (flex)
 */
 
+.flex-parent {
+  display: flex;
+}
+
+.flex-child {
+
+}
+
 .form, .glossary {
   margin: 2rem 1rem;
 }
@@ -86,12 +94,26 @@ Glossary Item styling (flex)
   text-align: center;
 }
 
-.glossary-item {
+.addForm {
+  margin: 0 auto;
+  max-width: 1000px;
+  min-height: 200px;
+  text-align: center;
+}
+
+form > label {
+  display: block;
+  margin-top: .5rem;
+}
+
+.glossary-item, .addForm {
   border: 1px solid silver;
   border-radius: 15px;
-  margin-bottom: 1rem;
   padding: 1rem;
-  display: flex;
+}
+
+.glossary-item {
+  margin-bottom: 1rem;
   justify-content: space-between;
   flex-wrap: wrap;
 }

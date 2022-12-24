@@ -12,7 +12,7 @@ const GlossaryItem = ({ word }) => {
 	};
 
 	return (
-		<div className="glossary-item">
+		<div className="glossary-item flex-parent">
 			<li><span>{word.name}</span>: {word.definition}</li>
 			<div>
 				<button>Edit</button>

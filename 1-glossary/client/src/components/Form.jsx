@@ -18,31 +18,41 @@ const Form = () => {
 	};
 
 	return (
-		<div className='form'>
+		<div className='addForm'>
+			<h2>Add New Term:</h2>
 			<form id="addTermForm" onSubmit={handleSubmit}>
-				<label htmlFor="term">Add New Term:</label>
-				<input
-					type="text"
-					name="term"
-					id="addTermWordInput"
-					placeholder="Type something..."
-				/>
+				<div className="flex-child">
+					<label htmlFor="term">Word</label>
+					<input
+						type="text"
+						name="term"
+						id="addTermWordInput"
+						placeholder="Type something..."
+					/>
+				</div>
 
-				<label htmlFor="definition">Definition:</label>
-				<input
-					type="text"
-					name="definition"
-					id="addTermDefInput"
-					placeholder="Type something..."
-				/>
+				<div className="flex-child">
+					<label htmlFor="definition">Definition</label>
+					<input
+						type="text"
+						name="definition"
+						id="addTermDefInput"
+						placeholder="Type something..."
+					/>
+				</div>
 
-				<label htmlFor="example">Use it in a sentence:</label>
-				<input
-					type="text"
-					name="example"
-					id="addTermExInput"
-					placeholder="Type something..."
-				/>
+				<div className="flex-child">
+					<label htmlFor="example">Example Sentence</label>
+					<input
+						type="text"
+						name="example"
+						id="addTermExInput"
+						placeholder="Type something..."
+					/>
+				</div>
+
+				{/* <div className="flex-child">
+				</div> */}
 
 				<button type="submit">Save Word</button>
 			</form>

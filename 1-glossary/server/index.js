@@ -16,6 +16,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/vocab', async (req, res) => {
+	// =======================================================
+	// 			TO-DO: Sort by Created Date Descending?
+	// =======================================================
 	const words = await getWords();
 	res.status(200).send(words);
 })
