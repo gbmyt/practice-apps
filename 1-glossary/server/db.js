@@ -45,12 +45,13 @@ const Word = mongoose.model('Word', wordSchema);
 // =========================
 let getGlossary = async (word, cb) => {
 	let data;
+
 	try {
 		if (!word) {
 			data = await Word.find({}).sort({ created_at: -1 })
 			console.log('Got all words');
 		} else if (word) {
-			console.log('Getting one word', data);
+			console.log('Getting one word');
 			data = await Word.findOne({ name: word });
 			console.log('Got one word', data);
 		}
@@ -58,7 +59,6 @@ let getGlossary = async (word, cb) => {
 	} catch (err) {
 		cb(err);
 	}
-
 };
 
 let dbSave = async (term, cb) => {

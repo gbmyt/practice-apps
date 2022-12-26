@@ -19,9 +19,9 @@ const GlossaryItem = ({ word }) => {
   return (
     <div className="glossary-item flex-parent">
       <li>
-        <span className="bold">{word.name}</span>: {word.definition}
+        <span className="bold">{ word ? word.name : 'Default Name' }</span>: { word ? word.definition : 'Default Definition' }
         <br />
-        <div className="example">{word.example}</div>
+        <div className="example">{ word ? word.example : 'Example Sentence Here.' }</div>
       </li>
       <div>
         <button onClick={updateWord}>Edit</button>

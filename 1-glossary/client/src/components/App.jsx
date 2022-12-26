@@ -10,22 +10,30 @@ const App = () => {
 	const [searchTerm, setSearchTerm] = React.useState('');
 
 	useEffect(() => {
-		getGlossary();
+		fetchGlossary();
 
 		return () => {};
-	}, [glossary]);
+	}, []);
 
-	const getGlossary = async () => {
+	// useEffect(() => {
+	// 	console.log('Change')
+
+	// 	return () => {};
+	// }, [glossary]);
+
+	const fetchGlossary = async () => {
 		const words = await axios.get('/glossary');
 		setGlossary(words.data);
 	};
 
 	const search = async () => {
-		console.log('Searching:', searchTerm);
-		const word = await axios.get(`/${searchTerm}`);
+		if (searchTerm.length) {
+			let word = await axios.get(`/${searchTerm}`);
 
-		// This doesn't work
-		setGlossary({ word.data });
+			// This changes state but doesn't re-render filtered list
+			setGlossary({ ...word.data });
+			console.log('Glossary', glossary);
+		}
 	};
 
 	return (
