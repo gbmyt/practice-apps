@@ -40,20 +40,18 @@ const wordSchema = mongoose.Schema({
 
 const Word = mongoose.model('Word', wordSchema);
 
-// =========================
-// 				DB METHODS
-// =========================
+// ==================================
+// 						DB METHODS
+// ==================================
 let getGlossary = async (word, cb) => {
 	let data;
 
 	try {
 		if (!word) {
 			data = await Word.find({}).sort({ created_at: -1 })
-			console.log('Got all words');
 		} else if (word) {
-			console.log('Getting one word');
 			data = await Word.findOne({ name: word });
-			console.log('Got one word', data);
+			// console.log('Got one word', data);
 		}
 		cb(null, data);
 	} catch (err) {

@@ -11,8 +11,6 @@ const App = () => {
 
 	useEffect(() => {
 		fetchGlossary();
-
-		return () => {};
 	}, []);
 
 	const fetchGlossary = async () => {
@@ -22,7 +20,6 @@ const App = () => {
 
 	useEffect(() => {
 		search();
-		return () => {};
 	}, [searchTerm]);
 
 	// ==================================================================
@@ -32,7 +29,8 @@ const App = () => {
 		if (searchTerm.length) {
 			let word = await axios.get(`/${searchTerm}`);
 
-			// Changes state but re-renders default GlossaryItem
+			// Changes state but re-renders default
+			// GlossaryItem instead of dynamic list
 			setGlossary({ ...word.data });
 		}
 	};

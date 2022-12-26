@@ -10,9 +10,7 @@ const dbUpdate = require('./db').dbUpdate;
 const dbDelete = require('./db').dbDelete;
 const getGlossary = require('./db').getGlossary;
 
-// app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/glossary', (req, res) => {
