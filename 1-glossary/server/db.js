@@ -43,23 +43,22 @@ const Word = mongoose.model('Word', wordSchema);
 // =========================
 // 				DB METHODS
 // =========================
-let getWords = async (cb) => {
-	// Testing Try/Catch Error-Handling
+let getGlossary = async (word, cb) => {
+	let data;
 	try {
-		const words = await Word.find({}).sort({ created_at: -1 });
-		cb(words);
-  } catch (e) {
-    console.error('Caught Error:', e.name + "\n" + e.message);
-  }
-};
+		if (!word) {
+			data = await Word.find({}).sort({ created_at: -1 })
+			console.log('Got all words');
+		} else if (word) {
+			console.log('Getting one word', data);
+			data = await Word.findOne({ name: word });
+			console.log('Got one word', data);
+		}
+		cb(null, data);
+	} catch (err) {
+		cb(err);
+	}
 
-let getWord = async (term, cb) => {
-	try {
-		const word = await Word.findOne({ name: term });
-		cb(word);
-  } catch (e) {
-    console.error('Caught Error:', e.name + "\n" + e.message);
-  }
 };
 
 let dbSave = async (term, cb) => {
@@ -74,8 +73,9 @@ let dbSave = async (term, cb) => {
 	try {
     await newWord.save()
 		console.log('Saved to database!');
-  } catch (e) {
+  } catch (err) {
 		console.error('Caught Error:', e.name + "\n" + e.message);
+		cb(err);
   } finally {
 		cb();
   }
@@ -101,8 +101,9 @@ let dbUpdate = (term, cb) => {
 let dbDelete = async (id, cb) => {
 	try {
 		await Word.deleteOne({ _id: id });
-  } catch (e) {
+  } catch (err) {
 		console.error('Caught Error:', e.name + "\n" + e.message);
+		cb(err);
   } finally {
 		cb();
   }
@@ -112,5 +113,4 @@ module.exports.word = Word;
 module.exports.dbSave = dbSave;
 module.exports.dbUpdate = dbUpdate;
 module.exports.dbDelete = dbDelete;
-module.exports.getWords = getWords;
-module.exports.getWord = getWord;
+module.exports.getGlossary = getGlossary;

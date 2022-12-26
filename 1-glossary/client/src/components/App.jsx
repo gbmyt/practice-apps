@@ -10,23 +10,22 @@ const App = () => {
 	const [searchTerm, setSearchTerm] = React.useState('');
 
 	useEffect(() => {
-		(async () => {
-			const words = await axios.get('/glossary');
-			setGlossary(words.data);
-		})();
+		getGlossary();
 
-		// Cleanup ToDo?
 		return () => {};
-	}, []);
+	}, [glossary]);
+
+	const getGlossary = async () => {
+		const words = await axios.get('/glossary');
+		setGlossary(words.data);
+	};
 
 	const search = async () => {
 		console.log('Searching:', searchTerm);
 		const word = await axios.get(`/${searchTerm}`);
-		console.log('word', word.data);
 
 		// This doesn't work
-		setGlossary(word.data);
-		console.log(glossary);
+		setGlossary({ word.data });
 	};
 
 	return (

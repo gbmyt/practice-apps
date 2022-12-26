@@ -8,8 +8,7 @@ var port = 3000;
 const dbSave = require('./db').dbSave;
 const dbUpdate = require('./db').dbUpdate;
 const dbDelete = require('./db').dbDelete;
-const getWords = require('./db').getWords;
-const getWord = require('./db').getWord;
+const getGlossary = require('./db').getGlossary;
 
 // app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -17,7 +16,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/glossary', (req, res) => {
-	getWords((err, words) => {
+	getGlossary(null, (err, words) => {
 		if (err) {
 			res.status(res.statusCode).send(err);
 		} else {
@@ -27,16 +26,19 @@ app.get('/glossary', (req, res) => {
 })
 
 app.get('/:term', (req, res) => {
-	getWord(req.params.term, (word) => {
-		// console.log('Word found', word);
-		res.status(res.statusCode).send(word);
+	getGlossary(req.params.term, (err, word) => {
+		if (err) {
+			res.status(res.statusCode).send(err);
+		} else {
+			console.log('App Get Word', word);
+			res.status(res.statusCode).send(word);
+		}
 	});
 });
 
 app.post('/create', (req, res) => {
 	dbSave(req.body.newTerm, (err) => {
 		if (err) {
-			console.error(err);
 			res.status(res.statusCode).send('Error Saving New Term');
 		} else {
 			res.status(res.statusCode).send('Saved!');
