@@ -74,7 +74,7 @@ let dbSave = async (term, cb) => {
     await newWord.save()
 		console.log('Saved to database!');
   } catch (err) {
-		console.error('Caught Error:', e.name + "\n" + e.message);
+		console.error('Caught Error:', err.name + "\n" + err.message);
 		cb(err);
   } finally {
 		cb();
@@ -82,27 +82,37 @@ let dbSave = async (term, cb) => {
 };
 
 let dbUpdate = (term, cb) => {
-	// Testing Promise Error-Handling
-	Word.findOne({ name: term.name })
-		.then(word => {
+	console.log(
+		'In dbUpdate', term.name,
+		'Def', term.definition,
+		'Ex', term.example
+	);
+
+	Word.findOne({ _id: term.id }, (err, word) => {
+		if (err) {
+			cb(err);
+		} else {
 			word.name = term.name;
 			word.definition = term.definition;
 			word.example = term.example;
-			word.save();
-		})
-		.then(() => {
-			console.log('Updated!');
-		})
-		.catch(err => {
-			console.error('Caught Error:', e.name + "\n" + e.message);
-		});
+
+			word.save()
+				.then(() => {
+					console.log('Updated!');
+					cb();
+				})
+				.catch(err => {
+					cb(err);
+				});
+		}
+	});
 };
 
 let dbDelete = async (id, cb) => {
 	try {
 		await Word.deleteOne({ _id: id });
   } catch (err) {
-		console.error('Caught Error:', e.name + "\n" + e.message);
+		console.error('Caught Error:', err.name + "\n" + err.message);
 		cb(err);
   } finally {
 		cb();

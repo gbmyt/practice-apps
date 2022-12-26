@@ -46,20 +46,8 @@ app.post('/create', (req, res) => {
 	});
 });
 
-app.post('/update', (req, res) => {
-	// console.log('Testing Body', req.body);
-
-	// Test update
-	// dbUpdate({
-	// 	name: 'anachronistic',
-	// 	definition: 'belonging or appropriate to an earlier period\, especially so as to seem conspicuously old-fashioned.',
-	// 	example: 'she is rebelling against the anachronistic morality of her parents'
-	// });
-
-	// ========================================================================
-	// 			TO-DO: Implement update in React Glossary List Item 'Edit'
-	// ========================================================================
-	dbUpdate(req.body.updatedTerm, (err) => {
+app.post('/update/:id', (req, res) => {
+	dbUpdate(req.body.newWord, (err) => {
 		if (err) {
 			console.error(err);
 			res.status(res.statusCode).send('Error Updating Term');

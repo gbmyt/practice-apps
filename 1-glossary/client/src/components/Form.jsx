@@ -25,7 +25,7 @@ const Form = () => {
 					<label htmlFor="term">Word</label>
 					<input
 						type="text"
-						name="term"
+						name="name"
 						id="addTermWordInput"
 						placeholder="Type something..."
 					/>
