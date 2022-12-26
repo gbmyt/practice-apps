@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 // =========================================================
-//                  			TO-DOs:
-// 	leaving definition blank on edit/save keeps original def
-// 		Add word type to glossary item (noun, adj, etc)
+//	TO-DO: Add word type to glossary item (noun, adj, etc)
 // =========================================================
 const GlossaryItem = ({ word, words, fetchGlossary }) => {
 	const [editMode, setEditMode] = useState(false);
-	const [currentWord, setCurrentWord] = useState({
-		name: 'Name',
-		definition: 'Definition',
-		example: 'Example'
-	});
+	const [currentName, setCurrentName] = useState('');
+	const [currentDef, setCurrentDef] = useState('');
+	const [currentEx, setCurrentEx] = useState('');
+
+	useEffect(() => {
+		if (word) {
+			setCurrentName(word.name);
+			setCurrentDef(word.definition);
+			setCurrentEx(word.example);
+		}
+	}, []);
 
   const deleteWord = async () => {
     await axios.post(`/delete/${word._id}`);
@@ -30,10 +34,6 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 				example: document.getElementById('editTermExInput').value
 			};
 
-			console.log('New Word:', newWord.name);
-			console.log('New Def:', newWord.definition);
-			console.log('New Example:', newWord.example);
-
 			axios.post(`/update/${word._id}`, { newWord })
 			.then(() => {
 				fetchGlossary();
@@ -44,13 +44,29 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 		}
   };
 
+	const handleChange = (e) => {
+		switch (e.target.name) {
+			case 'name':
+				setCurrentName(e.target.value);
+				break;
+			case 'definition':
+				setCurrentDef(e.target.value);
+				break;
+			case 'example':
+				setCurrentEx(e.target.value);
+				break;
+			default:
+				console.log('You didn\'t change anything');
+		}
+	};
+
   return (
     <div className="glossary-item flex-parent">
 			{ !editMode ?
 				(<li>
 					<span className="bold">{ word ? word.name : 'Default Name' }</span>: { word ? word.definition : 'Default Definition' }
 					<br />
-					<div className="example">{ word ? word.example : 'Example Sentence Here.' }</div>
+					<div className="example">{ word ? word.example : 'Example Sentence.' }</div>
 				</li>) :
 
 				(<li>
@@ -59,7 +75,8 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 						type="text"
 						name="name"
 						id="editTermWordInput"
-						placeholder={word.name}
+						value={currentName}
+						onChange={handleChange}
 					/>
 
 					<label htmlFor="definition">Definition</label>
@@ -67,7 +84,8 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 						type="text"
 						name="definition"
 						id="editTermDefInput"
-						placeholder={word.definition}
+						value={currentDef}
+						onChange={handleChange}
 					/>
 
 					<label htmlFor="example">Example</label>
@@ -75,7 +93,8 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 						type="text"
 						name="example"
 						id="editTermExInput"
-						placeholder={word.example}
+						value={currentEx}
+						onChange={handleChange}
 					/>
 				</li>)
 			}
