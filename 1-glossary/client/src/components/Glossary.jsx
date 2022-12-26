@@ -1,7 +1,7 @@
 import React from 'react';
 import GlossaryItem from './GlossaryItem';
 
-const Glossary = ({ words }) => {
+const Glossary = ({ words, query }) => {
 	return (
 		<div className="glossary">
 			<h2>Glossary</h2>

@@ -2,15 +2,10 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 
 const SearchBar = props => {
-	// const [searchTerm, setSearchTerm] = React.useState('');
-
 	const setTerm = (e) => {
 		props.setTerm(e.target.value);
 	};
 
-	// ==================================================================
-	//   TO-DO: Searching a term should filter existing glossary list
-	// ==================================================================
 	const search = (e) => {
 		e.preventDefault();
 		props.onSearch();
@@ -28,7 +23,6 @@ const SearchBar = props => {
 					value={props.searchTerm}
 					onChange={setTerm}
 				/>
-			<button type="submit" onClick={search}>Search</button>
 			</form>
 		</div>
 	)

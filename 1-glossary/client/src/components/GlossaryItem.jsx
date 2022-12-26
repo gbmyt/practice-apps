@@ -7,6 +7,7 @@ import axios from "axios";
 // Add word type to glossary item (noun, adj, etc)
 // =============================================
 const GlossaryItem = ({ word }) => {
+
   const deleteWord = async () => {
     await axios.post(`/delete/${word._id}`);
   };

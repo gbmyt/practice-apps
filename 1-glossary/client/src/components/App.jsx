@@ -15,24 +15,25 @@ const App = () => {
 		return () => {};
 	}, []);
 
-	// useEffect(() => {
-	// 	console.log('Change')
-
-	// 	return () => {};
-	// }, [glossary]);
-
 	const fetchGlossary = async () => {
 		const words = await axios.get('/glossary');
 		setGlossary(words.data);
 	};
 
+	useEffect(() => {
+		search();
+		return () => {};
+	}, [searchTerm]);
+
+	// ==================================================================
+	//   TO-DO: Searching a term should filter existing glossary list
+	// ==================================================================
 	const search = async () => {
 		if (searchTerm.length) {
 			let word = await axios.get(`/${searchTerm}`);
 
-			// This changes state but doesn't re-render filtered list
+			// Changes state but re-renders default GlossaryItem
 			setGlossary({ ...word.data });
-			console.log('Glossary', glossary);
 		}
 	};
 
@@ -40,7 +41,7 @@ const App = () => {
 		<>
 			<SearchBar onSearch={search} setTerm={setSearchTerm}/>
 			<Form />
-			<Glossary words={glossary} />
+			<Glossary words={glossary} query={searchTerm} />
 		</>
 	)
 };
