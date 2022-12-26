@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 
-const SearchBar = props => {
-	const setTerm = (e) => {
-		props.setTerm(e.target.value);
-	};
-
+const SearchBar = ({ onSearch, searchTerm, setSearchTerm }) => {
 	const search = (e) => {
 		e.preventDefault();
-		props.onSearch();
+		onSearch();
 	};
 
 	return (
@@ -19,10 +15,11 @@ const SearchBar = props => {
 					type="text"
 					name="search"
 					id="searchFormInput"
-					placeholder="Type something..."
-					value={props.searchTerm}
-					onChange={setTerm}
+					placeholder="Looking for something...?"
+					value={searchTerm}
+					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
+				<input type='submit' className='submitBtn' value='🔍' onClick={search} />
 			</form>
 		</div>
 	)

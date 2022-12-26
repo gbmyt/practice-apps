@@ -125,8 +125,12 @@ ul {
   margin-bottom: 1rem;
 }
 
-#searchForm > input {
-  min-width: 500px;
+#searchForm > #searchFormInput {
+  min-width: 375px;
+}
+
+.submitBtn {
+  width: 4rem;
 }
 
 /*

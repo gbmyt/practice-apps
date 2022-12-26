@@ -64,9 +64,9 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
     <div className="glossary-item flex-parent">
 			{ !editMode ?
 				(<li>
-					<span className="bold">{ word ? word.name : 'Default Name' }</span>: { word ? word.definition : 'Default Definition' }
+					<span className="bold">{ word.name }</span>: { word.definition}
 					<br />
-					<div className="example">{ word ? word.example : 'Example Sentence.' }</div>
+					<div className="example">{ word.example }</div>
 				</li>) :
 
 				(<li>

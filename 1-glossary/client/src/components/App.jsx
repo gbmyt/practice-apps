@@ -18,26 +18,26 @@ const App = () => {
 		setGlossary(words.data);
 	};
 
-	useEffect(() => {
-		search();
-	}, [searchTerm]);
+	// Was searching on searchTerm change,
+	// went back to using submit button
+	// useEffect(() => {
+	// 	search();
+	// }, [searchTerm]);
 
 	// ==================================================================
-	//   TO-DO: Searching a term should filter existing glossary list
+	//   TO-DO: Searching a non-existant term should return an Error
 	// ==================================================================
 	const search = async () => {
 		if (searchTerm.length) {
 			let word = await axios.get(`/${searchTerm}`);
-
-			// Changes state but re-renders default
-			// GlossaryItem instead of dynamic list
-			setGlossary({ ...word.data });
+			console.log('Word', word);
+			setGlossary([{ ...word.data }]);
 		}
 	};
 
 	return (
 		<>
-			<SearchBar onSearch={search} setTerm={setSearchTerm}/>
+			<SearchBar onSearch={search} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
 			<Form fetchGlossary={fetchGlossary}/>
 			<Glossary
 				words={glossary}

@@ -23,32 +23,29 @@ const Form = ({ fetchGlossary }) => {
 			<h2>Add New Word</h2>
 			<form className="flex-parent" id="addTermForm" onSubmit={handleSubmit}>
 				<div className="flex-child">
-					<label htmlFor="term">Word</label>
 					<input
 						type="text"
 						name="name"
 						id="addTermWordInput"
-						placeholder="Type something..."
+						placeholder="Type a word"
 					/>
 				</div>
 
 				<div className="flex-child">
-					<label htmlFor="definition">Definition</label>
 					<input
 						type="text"
 						name="definition"
 						id="addTermDefInput"
-						placeholder="Type something..."
+						placeholder="Tell us what it means"
 					/>
 				</div>
 
 				<div className="flex-child">
-					<label htmlFor="example">Example Sentence</label>
 					<input
 						type="text"
 						name="example"
 						id="addTermExInput"
-						placeholder="Type something..."
+						placeholder="Use it in a sentence"
 					/>
 				</div>
 

@@ -28,7 +28,6 @@ app.get('/:term', (req, res) => {
 		if (err) {
 			res.status(res.statusCode).send(err);
 		} else {
-			console.log('App Get Word', word)
 			res.status(res.statusCode).send(word);
 		}
 	});

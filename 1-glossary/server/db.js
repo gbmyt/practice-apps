@@ -51,9 +51,9 @@ let getGlossary = async (word, cb) => {
 			data = await Word.find({}).sort({ created_at: -1 })
 		} else if (word) {
 			data = await Word.findOne({ name: word });
-			// console.log('Got one word', data);
+			console.log('Got one word', data);
 		}
-		cb(null, data);
+		cb(null, data); // Failing silently when you search a non-existent word (?)
 	} catch (err) {
 		cb(err);
 	}
