@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const Form = () => {
+const Form = ({ fetchGlossary }) => {
 
 	// save new term to database and re-render glossary list
 	const handleSubmit = async (e) => {
@@ -15,6 +15,7 @@ const Form = () => {
 
 		console.log('Adding Term:', newTerm);
 		await axios.post('/create', { newTerm });
+		fetchGlossary();
 	};
 
 	return (

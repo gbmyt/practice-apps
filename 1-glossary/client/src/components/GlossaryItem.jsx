@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-// =============================================
-//                  TO-DOs:
-// 	on edit save causes updated word to display
-// Add word type to glossary item (noun, adj, etc)
-// =============================================
-const GlossaryItem = ({ word }) => {
+// =========================================================
+//                  			TO-DOs:
+// 	leaving definition blank on edit/save keeps original def
+// 		Add word type to glossary item (noun, adj, etc)
+// =========================================================
+const GlossaryItem = ({ word, words, fetchGlossary }) => {
 	const [editMode, setEditMode] = useState(false);
 	const [currentWord, setCurrentWord] = useState({
 		name: 'Name',
@@ -16,10 +16,11 @@ const GlossaryItem = ({ word }) => {
 
   const deleteWord = async () => {
     await axios.post(`/delete/${word._id}`);
+		fetchGlossary();
   };
 
-	useEffect(() => {
-		alert('Definition is required.');
+  const updateWord = async (e) => {
+		setEditMode(!editMode);
 
 		if (editMode) {
 			const newWord = {
@@ -33,12 +34,14 @@ const GlossaryItem = ({ word }) => {
 			console.log('New Def:', newWord.definition);
 			console.log('New Example:', newWord.example);
 
-			await axios.post(`/update/${word._id}`, { newWord });
+			axios.post(`/update/${word._id}`, { newWord })
+			.then(() => {
+				fetchGlossary();
+			})
+			.catch(err => {
+				console.log(err);
+			});
 		}
-	}, [editMode]);
-
-  const updateWord = async (e) => {
-		setEditMode(!editMode);
   };
 
   return (

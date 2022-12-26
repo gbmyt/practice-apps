@@ -40,8 +40,12 @@ const App = () => {
 	return (
 		<>
 			<SearchBar onSearch={search} setTerm={setSearchTerm}/>
-			<Form />
-			<Glossary words={glossary} query={searchTerm} />
+			<Form fetchGlossary={fetchGlossary}/>
+			<Glossary
+				words={glossary}
+				query={searchTerm}
+				fetchGlossary={fetchGlossary}
+			/>
 		</>
 	)
 };
