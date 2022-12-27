@@ -7,7 +7,7 @@ import BillingForm from './BillingForm.jsx';
 import Confirmation from './Confirmation.jsx';
 
 const App = () => {
-	const [checkoutStage, setCheckoutStage] = useState('');
+	const [checkoutStage, setCheckoutStage] = useState('home');
 
 	const handleClick = async () => {
 		console.log('Loading F1...');
@@ -41,10 +41,10 @@ const App = () => {
 			break;
 		case ('confirmation'):
 				return (
-					<Confirmation />
+					<Confirmation setCheckoutStage={setCheckoutStage} />
 				)
 				break;
-		default:
+		case ('home'):
 			return (
 				<div>
 					<h2>Shopping Cart 🛒</h2>
@@ -54,6 +54,8 @@ const App = () => {
 					<button onClick={handleClick}>Checkout</button>
 				</div>
 			)
+		default:
+			return (<div>There was a problem loading your shopping cart.</div>)
 	}
 };
 

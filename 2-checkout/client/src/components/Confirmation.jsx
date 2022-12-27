@@ -1,9 +1,11 @@
 import React from 'react';
 
-const Confirmation = () => {
+const Confirmation = ({ setCheckoutStage }) => {
 	const handleClick = (e) => {
 		e.preventDefault();
 		alert('Thanks for shopping with us! You will receive a confirmation email with your order details enclosed shortly.');
+		// Render home page
+		setCheckoutStage('home');
 	};
 
 	return (
