@@ -1,7 +1,13 @@
 import React from 'react';
 
 // F2 collects ship to address (line 1, line 2, city, state, zip code) and phone number.
-const FormTwo = () => {
+const FormTwo = ({ checkoutStage, setCheckoutStage }) => {
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log('Getting Billing Details...');
+    setCheckoutStage('billing details');
+  };
+
 	return (
 		<form>
 			<h1>Where Should We Send Your Stuff?</h1>
@@ -52,7 +58,7 @@ const FormTwo = () => {
       />
 
 
-			<button type='submit'>Next</button>
+			<button type='submit' onClick={handleClick}>Next</button>
 		</form>
 	)
 };

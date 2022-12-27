@@ -1,7 +1,13 @@
 import React from 'react';
 
 // F1 collects name, email, and password for account creation.
-const FormOne = () => {
+const FormOne = ({ checkoutStage, setCheckoutStage }) => {
+	const handleClick = (e) => {
+		e.preventDefault();
+		console.log('Getting Shipping Form...');
+		setCheckoutStage('shipping details');
+	};
+
 	return (
 		<form>
 			<h1>Create an Account:</h1>
@@ -33,7 +39,7 @@ const FormOne = () => {
 				// onChange={}
 			/>
 
-			<button type='submit'>Next</button>
+			<button type='submit' onClick={handleClick}>Next</button>
 		</form>
 	)
 };

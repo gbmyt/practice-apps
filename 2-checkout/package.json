@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "server-dev": "npx nodemon --watch server server/index.js",
-    "react-babel": "babel client/src --out-dir client/dist/compiled --presets=@babel/preset-react --source-maps inline --watch",
+    "react-babel": "babel client/src --out-dir client/dist --presets=@babel/preset-react --source-maps inline --watch",
     "client-dev": "npx webpack --watch",
     "db-create": "mysql -u root -p -e 'CREATE DATABASE IF NOT EXISTS checkout'",
     "build": "npx webpack",
@@ -12,6 +12,7 @@
   },
   "license": "Unlicensed",
   "dependencies": {
+    "axios": "^1.2.1",
     "babel-loader": "^9.1.0",
     "bluebird": "^3.7.2",
     "dotenv": "^16.0.3",
