@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import F1 from './F1.jsx';
-import F2 from './F2.jsx';
-import F3 from './F3.jsx';
+import AccountForm from './AccountForm.jsx';
+import ShippingForm from './ShippingForm.jsx';
+import BillingForm from './BillingForm.jsx';
 import Confirmation from './Confirmation.jsx';
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
 	switch (checkoutStage) {
 		case ('account creation'):
 			return (
-				<F1
+				<AccountForm
 					checkoutStage={checkoutStage}
 					setCheckoutStage={setCheckoutStage}
 				/>
@@ -25,7 +25,7 @@ const App = () => {
 				break;
 		case ('shipping details'):
 			return (
-				<F2
+				<ShippingForm
 					checkoutStage={checkoutStage}
 					setCheckoutStage={setCheckoutStage}
 				/>
@@ -33,7 +33,7 @@ const App = () => {
 			break;
 		case ('billing details'):
 			return (
-				<F3
+				<BillingForm
 					checkoutStage={checkoutStage}
 					setCheckoutStage={setCheckoutStage}
 				/>
@@ -51,7 +51,6 @@ const App = () => {
 					<p>
 						{/* <code>Page Cookie: {JSON.stringify(document.cookie, undefined, "\t")}</code> */}
 					</p>
-					{/* Take user to F1 on click */}
 					<button onClick={handleClick}>Checkout</button>
 				</div>
 			)

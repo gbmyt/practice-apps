@@ -1,7 +1,7 @@
 import React from 'react';
 
 // F1 collects name, email, and password for account creation.
-const FormOne = ({ checkoutStage, setCheckoutStage }) => {
+const AccountForm = ({ checkoutStage, setCheckoutStage }) => {
 	const handleClick = (e) => {
 		e.preventDefault();
 		console.log('Getting Shipping Form...');
@@ -44,4 +44,4 @@ const FormOne = ({ checkoutStage, setCheckoutStage }) => {
 	)
 };
 
-export default FormOne;
+export default AccountForm;

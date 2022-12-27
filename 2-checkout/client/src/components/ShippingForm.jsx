@@ -1,7 +1,7 @@
 import React from 'react';
 
 // F2 collects ship to address (line 1, line 2, city, state, zip code) and phone number.
-const FormTwo = ({ checkoutStage, setCheckoutStage }) => {
+const ShippingForm = ({ checkoutStage, setCheckoutStage }) => {
   const handleClick = (e) => {
     e.preventDefault();
     console.log('Getting Billing Details...');
@@ -63,4 +63,4 @@ const FormTwo = ({ checkoutStage, setCheckoutStage }) => {
 	)
 };
 
-export default FormTwo;
+export default ShippingForm;

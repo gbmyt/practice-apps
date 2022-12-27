@@ -1,7 +1,7 @@
 import React from 'react';
 
 // F3 collects credit card #, expiry date, CVV, and billing zip code.
-const FormThree = ({ checkoutStage, setCheckoutStage }) => {
+const BillingForm = ({ checkoutStage, setCheckoutStage }) => {
   const handleClick = (e) => {
     e.preventDefault();
     console.log('Getting Confirmation Page...');
@@ -53,4 +53,4 @@ const FormThree = ({ checkoutStage, setCheckoutStage }) => {
 	)
 };
 
-export default FormThree;
+export default BillingForm;
