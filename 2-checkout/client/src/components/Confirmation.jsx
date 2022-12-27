@@ -9,7 +9,33 @@ const Confirmation = () => {
 	return (
 		<div>
 			<h1>Confirm Your Details:</h1>
-			<p>Previously collected details here</p>
+			<div className="user-details">
+				<h3>User Details:</h3>
+				<p>Username</p>
+				<p>Password</p>
+				<p>Email Address</p>
+			</div>
+
+			<div className="shipping-details">
+				<h3>Shipping Details:</h3>
+
+				<p>Address Line 1</p>
+				<p>Address Line 2</p>
+				<p>City</p>
+				<p>State</p>
+				<p>Zip Code</p>
+			</div>
+
+			<div className="billing-details">
+				<h3>Billing Details:</h3>
+
+				<h3>Shipping Details:</h3>
+				<p>Address Line 1</p>
+				<p>Address Line 2</p>
+				<p>City</p>
+				<p>State</p>
+				<p>Zip Code</p>
+			</div>
 			<button onClick={handleClick}>Purchase</button>
 		</div>
 	)
