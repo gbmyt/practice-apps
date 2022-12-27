@@ -11,6 +11,12 @@ const connection = mysql.createConnection({
 
 const db = Promise.promisifyAll(connection, { multiArgs: true });
 
+// ======================================================
+//                      TO-DOs:
+//    Figure out if theres a better way to create
+//     checkout db (package.json script currently)
+// ======================================================
+
 db.connectAsync()
   .then(() => console.log(`Connected to MySQL as id: ${db.threadId}`))
   .then(() =>
