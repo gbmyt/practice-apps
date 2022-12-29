@@ -8,6 +8,25 @@ import Confirmation from './Confirmation.jsx';
 
 const App = () => {
 	const [checkoutStage, setCheckoutStage] = useState('home');
+	const [accountDetails, setAccountDetails] = useState({
+		username: '',
+		password: '',
+		email: '',
+		session: ''
+	});
+	const [shippingAddr, setShippingAddr] = useState({
+		addrOne: '',
+		addrTwo: '',
+		city: '',
+		state: '',
+		zip: ''
+	});
+	const [paymentDetails, setPaymentDetails] = useState({
+		cc: '',
+		expiry: '',
+		cvv: '',
+		billingZip: ''
+	});
 
 	const handleClick = async () => {
 		console.log('Loading F1...');
@@ -20,6 +39,8 @@ const App = () => {
 				<AccountForm
 					checkoutStage={checkoutStage}
 					setCheckoutStage={setCheckoutStage}
+					accountDetails={accountDetails}
+					setAccountDetails={setAccountDetails}
 				/>
 			)
 				break;
@@ -28,6 +49,8 @@ const App = () => {
 				<ShippingForm
 					checkoutStage={checkoutStage}
 					setCheckoutStage={setCheckoutStage}
+					shippingAddr={shippingAddr}
+					setShippingAddr={setShippingAddr}
 				/>
 			)
 			break;
@@ -36,12 +59,19 @@ const App = () => {
 				<PaymentForm
 					checkoutStage={checkoutStage}
 					setCheckoutStage={setCheckoutStage}
+					paymentDetails={paymentDetails}
+					setPaymentDetails={setPaymentDetails}
 				/>
 			)
 			break;
 		case ('confirmation'):
 				return (
-					<Confirmation setCheckoutStage={setCheckoutStage} />
+					<Confirmation
+						setCheckoutStage={setCheckoutStage}
+						accountDetails={accountDetails}
+						shippingAddr={shippingAddr}
+						paymentDetails={paymentDetails}
+					/>
 				)
 				break;
 		case ('home'):
