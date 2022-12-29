@@ -1,9 +1,13 @@
 import React from 'react';
+import axios from 'axios';
 
 const Confirmation = ({ setCheckoutStage, accountDetails,	shippingAddr,	paymentDetails }) => {
 	const handleClick = (e) => {
 		e.preventDefault();
-		alert('Thanks for shopping with us! You will receive a confirmation email with your order details enclosed shortly.');
+		console.log('Thanks for shopping with us! You will receive a confirmation email with your order details enclosed shortly.');
+
+		axios.post('users/create', { accountDetails });
+
 		// Render home page
 		setCheckoutStage('home');
 	};
@@ -26,6 +30,7 @@ const Confirmation = ({ setCheckoutStage, accountDetails,	shippingAddr,	paymentD
 				<p>City: {shippingAddr.city}</p>
 				<p>State: {shippingAddr.state}</p>
 				<p>Zip Code: {shippingAddr.zip}</p>
+				<p>Phone Number: {shippingAddr.phone}</p>
 			</div>
 
 			<div className="billing-details">

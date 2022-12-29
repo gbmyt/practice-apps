@@ -19,7 +19,8 @@ const App = () => {
 		addrTwo: '',
 		city: '',
 		state: '',
-		zip: ''
+		zip: '',
+		phone: ''
 	});
 	const [paymentDetails, setPaymentDetails] = useState({
 		cc: '',
@@ -78,9 +79,6 @@ const App = () => {
 			return (
 				<div>
 					<h2>Shopping Cart 🛒</h2>
-					<p>
-						{/* <code>Page Cookie: {JSON.stringify(document.cookie, undefined, "\t")}</code> */}
-					</p>
 					<button onClick={handleClick}>Checkout</button>
 				</div>
 			)

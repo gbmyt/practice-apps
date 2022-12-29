@@ -17,7 +17,8 @@ const ShippingForm = ({ checkoutStage, setCheckoutStage, shippingAddr, setShippi
       addrTwo: document.getElementById('addr2').value,
       city: document.getElementById('city').value,
       state: document.getElementById('state').value,
-      zip: document.getElementById('zip').value
+      zip: document.getElementById('zip').value,
+      phone: document.getElementById('phone').value
     }
     setShippingAddr(shippingDetails);
   };
@@ -76,7 +77,15 @@ const ShippingForm = ({ checkoutStage, setCheckoutStage, shippingAddr, setShippi
         onChange={handleChange}
       />
 
-
+      <label htmlFor="zip"></label>
+      <input
+        type="text"
+        name="phone"
+        id="phone"
+        placeholder="Phone Number"
+        value={shippingAddr.phone}
+        onChange={handleChange}
+      />
 			<button type='submit' onClick={handleClick}>Next</button>
 		</form>
 	)
