@@ -22,33 +22,44 @@ db.connectAsync()
   .then(() =>
     // Expand this table definition as needed:
     db.queryAsync(
-      "CREATE TABLE IF NOT EXISTS responses (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY)"
-    )
-  )
-  .then(() =>
-    // Hash/Hide Password
-    db.queryAsync(
-      `CREATE TABLE IF NOT EXISTS users (
+      `CREATE TABLE IF NOT EXISTS responses (
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        Username VARCHAR(100) NOT NULL,
-        Password VARCHAR(100) NOT NULL,
-        Email VARCHAR(100)
+        username VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        addrOne VARCHAR(255) NOT NULL,
+        addrTwo VARCHAR(255) NOT NULL,
+        city VARCHAR(255) NOT NULL,
+        state VARCHAR(255) NOT NULL,
+        zip VARCHAR(5) NOT NULL,
+        phone VARCHAR(10),
+        cc VARCHAR(255) NOT NULL,
+        expiry VARCHAR(5) NOT NULL,
+        cvv INT NOT NULL,
+        billingZip VARCHAR(6) NOT NULL,
+        session VARCHAR(255) NOT NULL
       )`
     )
   )
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    if (err.code === 'ER_BAD_DB_ERROR' && err.errno === 1049) {
+      console.log('Database Doesn\'t Exist ', err);
+    } else {
+      console.log('Error Connecting to db', err);
+    }
+  });
 
-let dbSave = user => {
+let dbSave = response => {
   connection.connect();
   console.log('inside db save func');
 
   const getUsersQuery = `SELECT * FROM users;`;
-  const setUserQuery = `INSERT INTO
-    users(Username, Password, Email)
-    VALUES(?, ?, ?)
+  const saveResponseQuery = `INSERT INTO
+    responses(username, password, email, addrOne, addrTwo, city, state, zip, phone, cc, expiry, cvv, billingZip, session)
+    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-  connection.query(setUserQuery, [user.username, user.password, user.email], (err, data) => {
+  connection.query(saveResponseQuery, Object.values(response), (err, data) => {
     if (err) {
       console.log(err);
     } else {
