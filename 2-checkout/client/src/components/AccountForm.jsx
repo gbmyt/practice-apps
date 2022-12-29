@@ -1,6 +1,13 @@
 import React from 'react';
 
 // F1 collects name, email, and password for account creation.
+
+// =======================================================
+//                  			TO-DO:
+// Form validation for empty required fields and incorrect values/types
+// (Refactor to React Router so I can use onSubmit / required input key?)
+// =================================================================
+
 const AccountForm = ({ checkoutStage, setCheckoutStage, accountDetails, setAccountDetails }) => {
 	const handleClick = (e) => {
 		e.preventDefault();
@@ -25,7 +32,7 @@ const AccountForm = ({ checkoutStage, setCheckoutStage, accountDetails, setAccou
 		<form>
 			<h1>Create an Account:</h1>
 
-			<label htmlFor="name"></label>
+			<label htmlFor="name">Username</label>
 			<input
 				type="text"
 				name="username"
@@ -33,9 +40,10 @@ const AccountForm = ({ checkoutStage, setCheckoutStage, accountDetails, setAccou
 				placeholder="Your name..."
 				value={accountDetails.username}
 				onChange={handleChange}
+				// required // doesn't work without using onSubmit instead of onClick
 			/>
 
-			<label htmlFor="password"></label>
+			<label htmlFor="password">Password</label>
 			<input
 				type="text"
 				name="password"
@@ -43,9 +51,10 @@ const AccountForm = ({ checkoutStage, setCheckoutStage, accountDetails, setAccou
 				placeholder="Choose a password..."
 				value={accountDetails.password}
 				onChange={handleChange}
+				// required
 			/>
 
-			<label htmlFor="email"></label>
+			<label htmlFor="email">Email</label>
 			<input
 				type="text"
 				name="email"
@@ -53,6 +62,7 @@ const AccountForm = ({ checkoutStage, setCheckoutStage, accountDetails, setAccou
 				placeholder="Email..."
 				value={accountDetails.email}
 				onChange={handleChange}
+				// required
 			/>
 
 			<button type='submit' onClick={handleClick}>Next</button>

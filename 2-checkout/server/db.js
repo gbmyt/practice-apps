@@ -49,6 +49,7 @@ db.connectAsync()
     }
   });
 
+// FRAGILE: No validation before attempting to save, fails silently
 let dbSave = response => {
   connection.connect();
   console.log('inside db save func');

@@ -2,11 +2,17 @@ import React from 'react';
 import axios from 'axios';
 
 const Confirmation = ({ setCheckoutStage, accountDetails,	shippingAddr,	paymentDetails }) => {
-	const handleClick = (e) => {
+	const handleClick = async (e) => {
 		e.preventDefault();
 		console.log('Thanks for shopping with us! You will receive a confirmation email with your order details enclosed shortly.');
 
-		axios.post('users/create', { accountDetails });
+		const formResponse = {
+			...accountDetails,
+			...shippingAddr,
+			...paymentDetails
+		}
+		console.log('formResponse', formResponse);
+		await axios.post('/checkout', { ...formResponse });
 
 		// Render home page
 		setCheckoutStage('home');
