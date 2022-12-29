@@ -10,6 +10,17 @@ const AccountForm = ({ checkoutStage, setCheckoutStage, accountDetails, setAccou
 		setCheckoutStage('shipping details');
 	};
 
+	const handleChange = (e) => {
+		e.preventDefault();
+		console.log('Inside Account Handle Change');
+		const user = {
+			username: document.getElementById('username').value,
+			password: document.getElementById('password').value,
+			email: document.getElementById('email').value
+		}
+		setAccountDetails({ ...user });
+	};
+
 	return (
 		<form>
 			<h1>Create an Account:</h1>
@@ -17,28 +28,31 @@ const AccountForm = ({ checkoutStage, setCheckoutStage, accountDetails, setAccou
 			<label htmlFor="name"></label>
 			<input
 				type="text"
-				name="name"
+				name="username"
+				id="username"
 				placeholder="Your name..."
-				// value={}
-				// onChange={}
-			/>
-
-			<label htmlFor="email"></label>
-			<input
-				type="text"
-				name="email"
-				placeholder="Email..."
-				// value={}
-				// onChange={}
+				value={accountDetails.username}
+				onChange={handleChange}
 			/>
 
 			<label htmlFor="password"></label>
 			<input
 				type="text"
 				name="password"
+				id="password"
 				placeholder="Choose a password..."
-				// value={}
-				// onChange={}
+				value={accountDetails.password}
+				onChange={handleChange}
+			/>
+
+			<label htmlFor="email"></label>
+			<input
+				type="text"
+				name="email"
+				id="email"
+				placeholder="Email..."
+				value={accountDetails.email}
+				onChange={handleChange}
 			/>
 
 			<button type='submit' onClick={handleClick}>Next</button>
