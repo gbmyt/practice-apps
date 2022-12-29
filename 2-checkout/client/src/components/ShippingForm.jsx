@@ -5,7 +5,7 @@ const ShippingForm = ({ checkoutStage, setCheckoutStage }) => {
   const handleClick = (e) => {
     e.preventDefault();
     console.log('Getting Billing Details...');
-    setCheckoutStage('billing details');
+    setCheckoutStage('payment details');
   };
 
 	return (

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import AccountForm from './AccountForm.jsx';
 import ShippingForm from './ShippingForm.jsx';
-import BillingForm from './BillingForm.jsx';
+import PaymentForm from './PaymentForm.jsx';
 import Confirmation from './Confirmation.jsx';
 
 const App = () => {
@@ -31,9 +31,9 @@ const App = () => {
 				/>
 			)
 			break;
-		case ('billing details'):
+		case ('payment details'):
 			return (
-				<BillingForm
+				<PaymentForm
 					checkoutStage={checkoutStage}
 					setCheckoutStage={setCheckoutStage}
 				/>
