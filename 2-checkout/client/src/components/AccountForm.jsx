@@ -12,7 +12,7 @@ const AccountForm = ({ checkoutStage, setCheckoutStage, accountDetails, setAccou
 
 	const handleChange = (e) => {
 		e.preventDefault();
-		console.log('Inside Account Handle Change');
+
 		const user = {
 			username: document.getElementById('username').value,
 			password: document.getElementById('password').value,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Confirmation = ({ setCheckoutStage }) => {
+const Confirmation = ({ setCheckoutStage, accountDetails,	shippingAddr,	paymentDetails }) => {
 	const handleClick = (e) => {
 		e.preventDefault();
 		alert('Thanks for shopping with us! You will receive a confirmation email with your order details enclosed shortly.');
@@ -13,30 +13,29 @@ const Confirmation = ({ setCheckoutStage }) => {
 			<h1>Confirm Your Details:</h1>
 			<div className="user-details">
 				<h3>User Details:</h3>
-				<p>Username</p>
-				<p>Password</p>
-				<p>Email Address</p>
+				<p>Username: {accountDetails.username}</p>
+				<p>Password: {accountDetails.password}</p>
+				<p>Email Address: {accountDetails.email}</p>
 			</div>
 
 			<div className="shipping-details">
 				<h3>Shipping Details:</h3>
 
-				<p>Address Line 1</p>
-				<p>Address Line 2</p>
-				<p>City</p>
-				<p>State</p>
-				<p>Zip Code</p>
+				<p>Address Line 1: {shippingAddr.addrOne}</p>
+				<p>Address Line 2: {shippingAddr.addrTwo}</p>
+				<p>City: {shippingAddr.city}</p>
+				<p>State: {shippingAddr.state}</p>
+				<p>Zip Code: {shippingAddr.zip}</p>
 			</div>
 
 			<div className="billing-details">
 				<h3>Billing Details:</h3>
 
 				<h3>Shipping Details:</h3>
-				<p>Address Line 1</p>
-				<p>Address Line 2</p>
-				<p>City</p>
-				<p>State</p>
-				<p>Zip Code</p>
+				<p>Credit Card #: {paymentDetails.cc}</p>
+				<p>Expiration Date: {paymentDetails.expiry}</p>
+				<p>CVV: {paymentDetails.cvv}</p>
+				<p>Billing Zip Code: {paymentDetails.billingZip}</p>
 			</div>
 			<button onClick={handleClick}>Purchase</button>
 		</div>

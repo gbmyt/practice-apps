@@ -11,7 +11,7 @@ const ShippingForm = ({ checkoutStage, setCheckoutStage, shippingAddr, setShippi
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log('In handleChange');
+
     const shippingDetails = {
       addrOne: document.getElementById('addr1').value,
       addrTwo: document.getElementById('addr2').value,
