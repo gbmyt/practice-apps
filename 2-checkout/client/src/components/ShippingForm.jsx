@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 // F2 collects ship to address (line 1, line 2, city, state, zip code) and phone number.
-const ShippingForm = ({ accountDetails, shippingAddr, setShippingAddr }) => {
-  console.log('Ship Form Acct Details', accountDetails);
-
+const ShippingForm = ({ response, setResponse }) => {
   const handleChange = (e) => {
     e.preventDefault();
 
@@ -16,7 +14,7 @@ const ShippingForm = ({ accountDetails, shippingAddr, setShippingAddr }) => {
       zip: document.getElementById('zip').value,
       phone: document.getElementById('phone').value
     }
-    setShippingAddr(shippingDetails);
+    setResponse(prev => ({...prev, ...shippingDetails }));
   };
 
 	return (
@@ -29,7 +27,7 @@ const ShippingForm = ({ accountDetails, shippingAddr, setShippingAddr }) => {
         name="addr1"
         id="addr1"
         placeholder="Address Line 1"
-        value={shippingAddr.addrOne}
+        value={response.addrOne}
         onChange={handleChange}
       />
 
@@ -39,7 +37,7 @@ const ShippingForm = ({ accountDetails, shippingAddr, setShippingAddr }) => {
         name="addr2"
         id="addr2"
         placeholder="Address Line 2"
-        value={shippingAddr.addrTwo}
+        value={response.addrTwo}
         onChange={handleChange}
       />
 
@@ -49,7 +47,7 @@ const ShippingForm = ({ accountDetails, shippingAddr, setShippingAddr }) => {
         name="city"
         id="city"
         placeholder="City"
-        value={shippingAddr.city}
+        value={response.city}
         onChange={handleChange}
       />
 
@@ -59,7 +57,7 @@ const ShippingForm = ({ accountDetails, shippingAddr, setShippingAddr }) => {
         name="state"
         id="state"
         placeholder="State"
-        value={shippingAddr.state}
+        value={response.state}
         onChange={handleChange}
       />
 
@@ -69,7 +67,7 @@ const ShippingForm = ({ accountDetails, shippingAddr, setShippingAddr }) => {
         name="zip"
         id="zip"
         placeholder="Zip Code"
-        value={shippingAddr.zip}
+        value={response.zip}
         onChange={handleChange}
       />
 
@@ -79,10 +77,10 @@ const ShippingForm = ({ accountDetails, shippingAddr, setShippingAddr }) => {
         name="phone"
         id="phone"
         placeholder="Phone Number"
-        value={shippingAddr.phone}
+        value={response.phone}
         onChange={handleChange}
       />
-      <button type="submit"><Link to='/payment'>Next</Link></button>
+      <button><Link to='/payment'>Next</Link></button>
 		</form>
 	)
 };

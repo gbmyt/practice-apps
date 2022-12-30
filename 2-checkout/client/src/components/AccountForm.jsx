@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 // (Refactor to React Router so I can use onSubmit / required input key?)
 // =================================================================
 
-const AccountForm = ({ accountDetails, setAccountDetails }) => {
+const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails }) => {
 
 	const handleChange = (e) => {
 		e.preventDefault();
@@ -18,7 +18,7 @@ const AccountForm = ({ accountDetails, setAccountDetails }) => {
 			password: document.getElementById('password').value,
 			email: document.getElementById('email').value
 		}
-		setAccountDetails({ ...user });
+		setResponse(prev => ({ ...prev, ...user }));
 	};
 
 	return (
@@ -31,7 +31,7 @@ const AccountForm = ({ accountDetails, setAccountDetails }) => {
 				name="username"
 				id="username"
 				placeholder="Your name..."
-				value={accountDetails.username}
+				value={response.username}
 				onChange={handleChange}
 				// required // doesn't work without using onSubmit instead of onClick
 			/>
@@ -42,7 +42,7 @@ const AccountForm = ({ accountDetails, setAccountDetails }) => {
 				name="password"
 				id="password"
 				placeholder="Choose a password..."
-				value={accountDetails.password}
+				value={response.password}
 				onChange={handleChange}
 				// required
 			/>
@@ -53,11 +53,11 @@ const AccountForm = ({ accountDetails, setAccountDetails }) => {
 				name="email"
 				id="email"
 				placeholder="Email..."
-				value={accountDetails.email}
+				value={response.email}
 				onChange={handleChange}
 				// required
 			/>
-			<button type="submit"><Link to='/shipping'>Next</Link></button>
+			<button><Link to='/shipping'>Next</Link></button>
 		</form>
 	)
 };

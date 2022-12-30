@@ -76,3 +76,9 @@ button, input[type="submit"], input[type="reset"] {
 	cursor: pointer;
 	outline: inherit;
 }
+
+.custom-component {
+	border: 1px solid silver;
+	margin: 2rem;
+	padding: 0.5rem;
+}

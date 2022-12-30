@@ -9,37 +9,35 @@ import PaymentForm from "./PaymentForm.jsx";
 import Confirmation from "./Confirmation.jsx";
 
 const App = () => {
-  const [accountDetails, setAccountDetails] = useState({
-    username: "",
-    password: "",
-    email: "",
-    session: "",
-  });
-  const [shippingAddr, setShippingAddr] = useState({
-    addrOne: "",
-    addrTwo: "",
-    city: "",
-    state: "",
-    zip: "",
-    phone: "",
-  });
-  const [paymentDetails, setPaymentDetails] = useState({
-    cc: "",
-    expiry: "",
-    cvv: "",
-    billingZip: "",
-  });
+	const [response, setResponse] = useState({
+		username: '',
+		password: '',
+		email: '',
+		session: '',
+
+		addrOne: '',
+		addrTwo: '',
+		city: '',
+		state: '',
+		zip: '',
+		phone: '',
+
+		cc: '',
+		expiry: '',
+		cvv: '',
+		billingZip: ''
+	});
 
   return (
-    <div>
+    <div className="custom-component" >
       <Routes>
-        <Route path="/" element={<HomePage />} />
+				<Route path="/" element={<HomePage />}/>
         <Route
           path="/account"
           element={
             <AccountForm
-              accountDetails={accountDetails}
-              setAccountDetails={setAccountDetails}
+							response={response}
+							setResponse={setResponse}
             />
           }
         />
@@ -47,9 +45,8 @@ const App = () => {
           path="/shipping"
           element={
             <ShippingForm
-							accountDetails={accountDetails}
-              shippingAddr={shippingAddr}
-              setShippingAddr={setShippingAddr}
+							response={response}
+							setResponse={setResponse}
             />
           }
         />
@@ -57,8 +54,8 @@ const App = () => {
           path="/payment"
           element={
             <PaymentForm
-              paymentDetails={paymentDetails}
-              setPaymentDetails={setPaymentDetails}
+							response={response}
+							setResponse={setResponse}
             />
           }
         />
@@ -66,9 +63,7 @@ const App = () => {
           path="/confirmation"
           element={
             <Confirmation
-              accountDetails={accountDetails}
-              shippingAddr={shippingAddr}
-              paymentDetails={paymentDetails}
+							response={response}
             />
           }
         />

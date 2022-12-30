@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 // F3 collects credit card #, expiry date, CVV, and billing zip code.
-const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
+const PaymentForm = ({ response, setResponse }) => {
   const handleChange = (e) => {
     e.preventDefault();
     const paymentInfo = {
@@ -11,7 +11,7 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
       cvv: document.getElementById('cvv').value,
       billingZip: document.getElementById('billing-zip').value
     }
-    setPaymentDetails({ ...paymentInfo });
+    setResponse(prev => ({ ...prev, ...paymentInfo }));
   };
 
   return (
@@ -24,7 +24,7 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
         name="cc"
         id="cc"
         placeholder="Credit Card Number"
-        value={paymentDetails.cc}
+        value={response.cc}
         onChange={handleChange}
       />
 
@@ -34,7 +34,7 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
         name="expiry"
         id="expiry"
         placeholder="Expiration Date"
-        value={paymentDetails.expiry}
+        value={response.expiry}
         onChange={handleChange}
       />
 
@@ -44,7 +44,7 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
         name="cvv"
         id="cvv"
         placeholder="Four Digit CVV"
-        value={paymentDetails.cvv}
+        value={response.cvv}
         onChange={handleChange}
       />
 
@@ -54,10 +54,10 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
         name="billing-zip"
         id="billing-zip"
         placeholder="Billing Zip Code"
-        value={paymentDetails.billingZip}
+        value={response.billingZip}
         onChange={handleChange}
       />
-      <button type="submit"><Link to='/confirmation'>Next</Link></button>
+      <button><Link to='/confirmation'>Next</Link></button>
 		</form>
 	)
 };
