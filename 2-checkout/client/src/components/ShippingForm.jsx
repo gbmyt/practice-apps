@@ -1,11 +1,29 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import ConditionalLink from './ConditionalLink.jsx';
 
 // F2 collects ship to address (line 1, line 2, city, state, zip code) and phone number.
-const ShippingForm = ({ response, setResponse }) => {
-  const handleChange = (e) => {
-    e.preventDefault();
+const ShippingForm = ({
+  response,
+  formFields,
+  setFormFields,
+  invalidInput,
+  notFirstRender,
+  setResponse,
+  shouldRedirect,
+  setShouldRedirect,
+  handleSubmit
+}) => {
 
+  // Make sure we start out with a redirect/false
+	useEffect(() => {
+		setShouldRedirect(false);
+	}, []);
+
+  useEffect(() => {
+		!invalidInput && notFirstRender ? setShouldRedirect(true) : setShouldRedirect(false);
+	}, [formFields]);
+
+  const handleChange = () => {
     const shippingDetails = {
       addrOne: document.getElementById('addr1').value,
       addrTwo: document.getElementById('addr2').value,
@@ -14,6 +32,7 @@ const ShippingForm = ({ response, setResponse }) => {
       zip: document.getElementById('zip').value,
       phone: document.getElementById('phone').value
     }
+    setFormFields(prev => ({...prev, ...shippingDetails }));
     setResponse(prev => ({...prev, ...shippingDetails }));
   };
 
@@ -80,7 +99,10 @@ const ShippingForm = ({ response, setResponse }) => {
         value={response.phone}
         onChange={handleChange}
       />
-      <button><Link to='/payment'>Next</Link></button>
+
+      <ConditionalLink to='/payment' condition={shouldRedirect}>
+				<button onClick={handleSubmit}>Next</button>
+			</ConditionalLink>
 		</form>
 	)
 };

@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import ConditionalLink from './ConditionalLink.jsx'
-const validateFormInput = require('../../../utils/validateFormInput').validateFormInput;
+import ConditionalLink from './ConditionalLink.jsx';
 
 // F1 collects name, email, and password for account creation.
-const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails }) => {
-	const [currentUser, setCurrentUser] = useState({});
-	const [shouldRedirect, setShouldRedirect] = useState(false);
-	const notFirstRender = Object.keys(currentUser).length;
-	const invalidInput = validateFormInput(currentUser);
+const AccountForm = ({
+	response,
+	formFields,
+	setFormFields,
+	invalidInput,
+  notFirstRender,
+	setResponse,
+	shouldRedirect,
+	setShouldRedirect,
+	handleSubmit
+}) => {
+
+	// Make sure we start out with a redirect/false
+	useEffect(() => {
+		setShouldRedirect(false);
+	}, []);
 
 	// If all fields have been filled out, allow redirect to Shipping Details
 	useEffect(() => {
 		!invalidInput && notFirstRender ? setShouldRedirect(true) : setShouldRedirect(false);
-	}, [currentUser]);
+	}, [formFields]);
 
 	// =============================================
 	// 							CUSTOM HANDLERS
@@ -23,22 +33,8 @@ const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails 
 			password: document.getElementById('password').value,
 			email: document.getElementById('email').value
 		}
-		setCurrentUser(prev => ({ ...prev, ...user }));
+		setFormFields(prev => ({ ...prev, ...user }));
 		setResponse(prev => ({ ...prev, ...user }));
-	};
-
-	const handleSubmit = (e) => {
-		if (!shouldRedirect) {
-			e.preventDefault();
-
-			if (notFirstRender) {
-				invalidInput.forEach(field => {
-					console.log(`Please fill out ${field} field and try again.`);
-				})
-			} else {
-				console.log('All fields are required. Please try again.');
-			}
-		}
 	};
 
 	return (

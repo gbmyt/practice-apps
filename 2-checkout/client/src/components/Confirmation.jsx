@@ -10,16 +10,16 @@ const Confirmation = ({ response }) => {
 
 	return (
 		<div>
-			<h1>Confirm Your Details:</h1>
+			<h1>Confirm Your Details</h1>
 			<div className="user-details custom-component">
-				<h3>User Details:</h3>
+				<h3>User Details</h3>
 				<p>Username: {response.username}</p>
 				<p>Password: {response.password}</p>
 				<p>Email Address: {response.email}</p>
 			</div>
 
 			<div className="shipping-details custom-component">
-				<h3>Shipping Details:</h3>
+				<h3>Shipping Details</h3>
 
 				<p>Address Line 1: {response.addrOne}</p>
 				<p>Address Line 2: {response.addrTwo}</p>
@@ -30,7 +30,7 @@ const Confirmation = ({ response }) => {
 			</div>
 
 			<div className="billing-details custom-component">
-				<h3>Payment Details:</h3>
+				<h3>Payment Details</h3>
 				<p>Credit Card #: {response.cc}</p>
 				<p>Expiration Date: {response.expiry}</p>
 				<p>CVV: {response.cvv}</p>

@@ -8,7 +8,14 @@ import ShippingForm from "./ShippingForm.jsx";
 import PaymentForm from "./PaymentForm.jsx";
 import Confirmation from "./Confirmation.jsx";
 
+const validateFormInput = require('../../../utils/validateFormInput').validateFormInput;
+
 const App = () => {
+	const [shouldRedirect, setShouldRedirect] = useState(false);
+	const [formFields, setFormFields] = useState({});
+	const notFirstRender = Object.keys(formFields).length;
+	const invalidInput = validateFormInput(formFields);
+
 	const [response, setResponse] = useState({
 		username: '',
 		password: '',
@@ -28,34 +35,71 @@ const App = () => {
 		billingZip: ''
 	});
 
+	const handleSubmit = (e) => {
+    if (!shouldRedirect) {
+			e.preventDefault();
+			if (notFirstRender) {
+        console.log(`Whoops! ${invalidInput.join(', ')} ${invalidInput.length === 1 ? 'is' : 'are'} required. Please try again.`);
+			} else {
+				console.log('All fields are required. Please try again.');
+			}
+		}
+  };
+
   return (
     <div className="custom-component" >
       <Routes>
 				<Route path="/" element={<HomePage />}/>
-        <Route
+				<Route
           path="/account"
           element={
             <AccountForm
 							response={response}
+							formFields={formFields}
+							setFormFields={setFormFields}
+							invalidInput={invalidInput}
+							notFirstRender={notFirstRender}
+
 							setResponse={setResponse}
+							shouldRedirect={shouldRedirect}
+							setShouldRedirect={setShouldRedirect}
+							handleSubmit={handleSubmit}
             />
           }
         />
+
         <Route
           path="/shipping"
           element={
             <ShippingForm
 							response={response}
+							formFields={formFields}
+							setFormFields={setFormFields}
+							invalidInput={invalidInput}
+							notFirstRender={notFirstRender}
+
 							setResponse={setResponse}
+							shouldRedirect={shouldRedirect}
+							setShouldRedirect={setShouldRedirect}
+							handleSubmit={handleSubmit}
             />
           }
         />
+
         <Route
           path="/payment"
           element={
             <PaymentForm
 							response={response}
+							formFields={formFields}
+							setFormFields={setFormFields}
+							invalidInput={invalidInput}
+							notFirstRender={notFirstRender}
+
 							setResponse={setResponse}
+							shouldRedirect={shouldRedirect}
+							setShouldRedirect={setShouldRedirect}
+							handleSubmit={handleSubmit}
             />
           }
         />

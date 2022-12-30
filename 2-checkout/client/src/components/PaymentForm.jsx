@@ -1,16 +1,36 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import ConditionalLink from './ConditionalLink.jsx';
 
 // F3 collects credit card #, expiry date, CVV, and billing zip code.
-const PaymentForm = ({ response, setResponse }) => {
+const PaymentForm = ({
+	response,
+	formFields,
+	setFormFields,
+	invalidInput,
+  notFirstRender,
+	setResponse,
+	shouldRedirect,
+	setShouldRedirect,
+	handleSubmit
+}) => {
+  // Make sure we start out with a redirect/false
+	useEffect(() => {
+		setShouldRedirect(false);
+	}, []);
+
+	// If all fields have been filled out, allow redirect to Shipping Details
+	useEffect(() => {
+		!invalidInput && notFirstRender ? setShouldRedirect(true) : setShouldRedirect(false);
+	}, [formFields]);
+
   const handleChange = (e) => {
-    e.preventDefault();
     const paymentInfo = {
       cc: document.getElementById('cc').value,
       expiry: document.getElementById('expiry').value,
       cvv: document.getElementById('cvv').value,
       billingZip: document.getElementById('billing-zip').value
     }
+    setFormFields(prev => ({ ...prev, ...paymentInfo }));
     setResponse(prev => ({ ...prev, ...paymentInfo }));
   };
 
@@ -57,7 +77,10 @@ const PaymentForm = ({ response, setResponse }) => {
         value={response.billingZip}
         onChange={handleChange}
       />
-      <button><Link to='/confirmation'>Next</Link></button>
+
+      <ConditionalLink to='/confirmation' condition={shouldRedirect}>
+				<button onClick={handleSubmit}>Next</button>
+			</ConditionalLink>
 		</form>
 	)
 };
