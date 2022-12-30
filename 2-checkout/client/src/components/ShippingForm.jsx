@@ -18,7 +18,7 @@ const ShippingForm = ({ response, setResponse }) => {
   };
 
 	return (
-		<form>
+		<form id="shipping-info">
 			<h1>Where Should We Send Your Stuff?</h1>
 
 			<label htmlFor="addr1"></label>

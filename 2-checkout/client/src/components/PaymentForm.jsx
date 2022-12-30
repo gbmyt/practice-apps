@@ -15,7 +15,7 @@ const PaymentForm = ({ response, setResponse }) => {
   };
 
   return (
-		<form>
+		<form id="payment-info">
 			<h1>Payment Details</h1>
 
 			<label htmlFor="cc"></label>

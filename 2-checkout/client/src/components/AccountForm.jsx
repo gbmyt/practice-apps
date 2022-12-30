@@ -6,17 +6,12 @@ const validateFormInput = require('../../../utils/validateFormInput').validateFo
 const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails }) => {
 	const [currentUser, setCurrentUser] = useState({});
 	const [shouldRedirect, setShouldRedirect] = useState(false);
+	const notFirstRender = Object.keys(currentUser).length;
+	const invalidInput = validateFormInput(currentUser);
 
+	// If all fields have been filled out, allow redirect to Shipping Details
 	useEffect(() => {
-		const invalidInput = validateFormInput(currentUser);
-		const notFirstRender = Object.keys(currentUser).length;
-
-		if (!invalidInput && notFirstRender) {
-			// if user is valid, set shouldRedirect to true
-			setShouldRedirect(true);
-		} else {
-			setShouldRedirect(false);
-		}
+		!invalidInput && notFirstRender ? setShouldRedirect(true) : setShouldRedirect(false);
 	}, [currentUser]);
 
 	// =============================================
@@ -35,10 +30,9 @@ const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails 
 	const handleSubmit = (e) => {
 		if (!shouldRedirect) {
 			e.preventDefault();
-			if (Object.keys(currentUser).length) {
-				const invalidInputFields = validateFormInput(currentUser);
 
-				invalidInputFields.forEach(field => {
+			if (notFirstRender) {
+				invalidInput.forEach(field => {
 					console.log(`Please fill out ${field} field and try again.`);
 				})
 			} else {
@@ -48,7 +42,7 @@ const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails 
 	};
 
 	return (
-		<form>
+		<form id="create-account">
 			<h1>Create an Account:</h1>
 
 			<label htmlFor="name">Username</label>
