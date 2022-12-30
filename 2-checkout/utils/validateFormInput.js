@@ -1,4 +1,3 @@
-
 const validateFormInput = (form) => {
 	let fields = [];
 

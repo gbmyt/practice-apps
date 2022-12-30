@@ -11,37 +11,38 @@ import Confirmation from "./Confirmation.jsx";
 const validateFormInput = require('../../../utils/validateFormInput').validateFormInput;
 
 const App = () => {
+	const [paymentStatus, setPaymentStatus] = useState(false);
 	const [shouldRedirect, setShouldRedirect] = useState(false);
 	const [formFields, setFormFields] = useState({});
 	const notFirstRender = Object.keys(formFields).length;
 	const invalidInput = validateFormInput(formFields);
 
 	const [response, setResponse] = useState({
-		username: '',
-		password: '',
-		email: '',
-		session: '',
+		Username: '',
+		Password: '',
+		Email: '',
+		Session: '',
 
-		addrOne: '',
-		addrTwo: '',
-		city: '',
-		state: '',
-		zip: '',
-		phone: '',
+		AddrOne: '',
+		AddrTwo: '',
+		City: '',
+		State: '',
+		Zip: '',
+		Phone: '',
 
-		cc: '',
-		expiry: '',
-		cvv: '',
-		billingZip: ''
+		CC: '',
+		Expiry: '',
+		CVV: '',
+		BillingZip: ''
 	});
 
 	const handleSubmit = (e) => {
     if (!shouldRedirect) {
 			e.preventDefault();
 			if (notFirstRender) {
-        console.log(`Whoops! ${invalidInput.join(', ')} ${invalidInput.length === 1 ? 'is' : 'are'} required. Please try again.`);
+        alert(`Whoops! ${invalidInput.join(', ')} ${invalidInput.length === 1 ? 'is' : 'are'} required. Please try again.`);
 			} else {
-				console.log('All fields are required. Please try again.');
+				alert('All fields are required. Please try again.');
 			}
 		}
   };
@@ -49,7 +50,7 @@ const App = () => {
   return (
     <div className="custom-component" >
       <Routes>
-				<Route path="/" element={<HomePage />}/>
+				<Route path="/" element={<HomePage paymentStatus={paymentStatus} />}/>
 				<Route
           path="/account"
           element={
@@ -108,6 +109,8 @@ const App = () => {
           element={
             <Confirmation
 							response={response}
+							paymentStatus={paymentStatus}
+							setPaymentStatus={setPaymentStatus}
             />
           }
         />

@@ -25,12 +25,12 @@ const ShippingForm = ({
 
   const handleChange = () => {
     const shippingDetails = {
-      addrOne: document.getElementById('addr1').value,
-      addrTwo: document.getElementById('addr2').value,
-      city: document.getElementById('city').value,
-      state: document.getElementById('state').value,
-      zip: document.getElementById('zip').value,
-      phone: document.getElementById('phone').value
+      AddrOne: document.getElementById('addr1').value,
+      AddrTwo: document.getElementById('addr2').value,
+      City: document.getElementById('city').value,
+      State: document.getElementById('state').value,
+      Zip: document.getElementById('zip').value,
+      Phone: document.getElementById('phone').value
     }
     setFormFields(prev => ({...prev, ...shippingDetails }));
     setResponse(prev => ({...prev, ...shippingDetails }));

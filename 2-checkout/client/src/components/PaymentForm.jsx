@@ -25,10 +25,10 @@ const PaymentForm = ({
 
   const handleChange = (e) => {
     const paymentInfo = {
-      cc: document.getElementById('cc').value,
-      expiry: document.getElementById('expiry').value,
-      cvv: document.getElementById('cvv').value,
-      billingZip: document.getElementById('billing-zip').value
+      CC: document.getElementById('cc').value,
+      Expiry: document.getElementById('expiry').value,
+      CVV: document.getElementById('cvv').value,
+      BillingZip: document.getElementById('billing-zip').value
     }
     setFormFields(prev => ({ ...prev, ...paymentInfo }));
     setResponse(prev => ({ ...prev, ...paymentInfo }));

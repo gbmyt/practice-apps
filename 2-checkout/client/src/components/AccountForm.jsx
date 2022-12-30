@@ -29,9 +29,9 @@ const AccountForm = ({
 	// =============================================
 	const handleChange = () => {
 		const user = {
-			username: document.getElementById('username').value,
-			password: document.getElementById('password').value,
-			email: document.getElementById('email').value
+			Username: document.getElementById('username').value,
+			Password: document.getElementById('password').value,
+			Email: document.getElementById('email').value
 		}
 		setFormFields(prev => ({ ...prev, ...user }));
 		setResponse(prev => ({ ...prev, ...user }));

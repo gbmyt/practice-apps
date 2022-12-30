@@ -102,3 +102,11 @@ button, input[type="submit"], input[type="reset"] {
 #payment-info > label {
 	display: block;
 }
+
+/* =============================================
+                  Summary:
+============================================= */
+
+#payment-confirmation {
+	font-style: italic;
+}
