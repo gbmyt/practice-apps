@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 // F3 collects credit card #, expiry date, CVV, and billing zip code.
 const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
@@ -56,7 +57,7 @@ const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
         value={paymentDetails.billingZip}
         onChange={handleChange}
       />
-      <button type="submit"><a href='/confirmation'>Next</a></button>
+      <button type="submit"><Link to='/confirmation'>Next</Link></button>
 		</form>
 	)
 };

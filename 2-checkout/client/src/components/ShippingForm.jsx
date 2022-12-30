@@ -1,7 +1,10 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 // F2 collects ship to address (line 1, line 2, city, state, zip code) and phone number.
-const ShippingForm = ({ shippingAddr, setShippingAddr }) => {
+const ShippingForm = ({ accountDetails, shippingAddr, setShippingAddr }) => {
+  console.log('Ship Form Acct Details', accountDetails);
+
   const handleChange = (e) => {
     e.preventDefault();
 
@@ -79,7 +82,7 @@ const ShippingForm = ({ shippingAddr, setShippingAddr }) => {
         value={shippingAddr.phone}
         onChange={handleChange}
       />
-      <button type="submit"><a href='/payment'>Next</a></button>
+      <button type="submit"><Link to='/payment'>Next</Link></button>
 		</form>
 	)
 };

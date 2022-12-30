@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const Confirmation = ({ accountDetails,	shippingAddr,	paymentDetails }) => {
@@ -8,6 +9,7 @@ const Confirmation = ({ accountDetails,	shippingAddr,	paymentDetails }) => {
 			...shippingAddr,
 			...paymentDetails
 		}
+		console.log('Form Response', formResponse);
 		await axios.post('/checkout', { ...formResponse });
 	};
 
@@ -41,7 +43,7 @@ const Confirmation = ({ accountDetails,	shippingAddr,	paymentDetails }) => {
 				<p>CVV: {paymentDetails.cvv}</p>
 				<p>Billing Zip Code: {paymentDetails.billingZip}</p>
 			</div>
-			<button onClick={handleClick} type="submit"><a href="/">Purchase</a></button>
+			<button onClick={handleClick} type="submit"><Link to="/">Purchase</Link></button>
 		</div>
 	)
 };

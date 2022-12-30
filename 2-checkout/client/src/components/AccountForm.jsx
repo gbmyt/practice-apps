@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 // F1 collects name, email, and password for account creation.
 
@@ -12,7 +13,6 @@ const AccountForm = ({ accountDetails, setAccountDetails }) => {
 
 	const handleChange = (e) => {
 		e.preventDefault();
-
 		const user = {
 			username: document.getElementById('username').value,
 			password: document.getElementById('password').value,
@@ -57,7 +57,7 @@ const AccountForm = ({ accountDetails, setAccountDetails }) => {
 				onChange={handleChange}
 				// required
 			/>
-			<button type="submit"><a href='/shipping'>Next</a></button>
+			<button type="submit"><Link to='/shipping'>Next</Link></button>
 		</form>
 	)
 };
