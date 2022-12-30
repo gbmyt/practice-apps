@@ -67,6 +67,10 @@ a, a:link, a:active, a:visited, a:hover, a::after, a::before {
 	color: white;
 }
 
+button {
+	margin: 1rem 0;
+}
+
 button, input[type="submit"], input[type="reset"] {
 	background-color: aquamarine;
 	color: inherit;
@@ -76,6 +80,7 @@ button, input[type="submit"], input[type="reset"] {
 	cursor: pointer;
 	outline: inherit;
 }
+
 
 .custom-component {
 	border: 1px solid silver;

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import ConditionalLink from './ConditionalLink.jsx'
 
 // F1 collects name, email, and password for account creation.
 
@@ -10,15 +10,58 @@ import { Link } from "react-router-dom";
 // =================================================================
 
 const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails }) => {
+	const [currentUser, setCurrentUser] = useState({});
+	const [shouldRedirect, setShouldRedirect] = useState(false);
 
-	const handleChange = (e) => {
-		e.preventDefault();
+	useEffect(() => {
+		const invalidInput = validateInput(currentUser);
+		const notFirstRender = Object.keys(currentUser).length;
+
+		if (!invalidInput && notFirstRender) {
+			// if user is valid, set shouldRedirect to true
+			setShouldRedirect(true);
+		} else {
+			setShouldRedirect(false);
+		}
+	}, [currentUser]);
+
+	// =============================================
+	// 							CUSTOM HANDLERS
+	// =============================================
+	const validateInput = (form) => {
+		let fields = [];
+
+		Object.keys(form).forEach(field => {
+			if (!form[field].trim()) {
+				fields.push(field);
+			}
+		});
+		return fields.length > 0 ? fields : null;
+	};
+
+	const handleChange = () => {
 		const user = {
 			username: document.getElementById('username').value,
 			password: document.getElementById('password').value,
 			email: document.getElementById('email').value
 		}
+		setCurrentUser(prev => ({ ...prev, ...user }));
 		setResponse(prev => ({ ...prev, ...user }));
+	};
+
+	const handleClick = (e) => {
+		if (!shouldRedirect) {
+			e.preventDefault();
+			if (Object.keys(currentUser).length) {
+				const invalidInputFields = validateInput(currentUser);
+
+				invalidInputFields.forEach(field => {
+					console.log(`Please fill out ${field} field and try again.`);
+				})
+			} else {
+				console.log('All fields are required. Please try again.');
+			}
+		}
 	};
 
 	return (
@@ -33,8 +76,7 @@ const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails 
 				placeholder="Your name..."
 				value={response.username}
 				onChange={handleChange}
-				// required // doesn't work without using onSubmit instead of onClick
-			/>
+			></input>
 
 			<label htmlFor="password">Password</label>
 			<input
@@ -44,8 +86,7 @@ const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails 
 				placeholder="Choose a password..."
 				value={response.password}
 				onChange={handleChange}
-				// required
-			/>
+			></input>
 
 			<label htmlFor="email">Email</label>
 			<input
@@ -55,9 +96,13 @@ const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails 
 				placeholder="Email..."
 				value={response.email}
 				onChange={handleChange}
-				// required
-			/>
-			<button><Link to='/shipping'>Next</Link></button>
+			></input>
+
+			<ConditionalLink to='/shipping' condition={shouldRedirect}>
+				<button onClick={handleClick}>
+					Next
+				</button>
+			</ConditionalLink>
 		</form>
 	)
 };
