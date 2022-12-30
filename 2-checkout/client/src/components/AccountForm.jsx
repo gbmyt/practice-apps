@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import ConditionalLink from './ConditionalLink.jsx'
+const validateFormInput = require('../../../utils/validateFormInput').validateFormInput;
 
 // F1 collects name, email, and password for account creation.
-
-// =======================================================
-//                  			TO-DO:
-// Form validation for empty required fields and incorrect values/types
-// (Refactor to React Router so I can use onSubmit / required input key?)
-// =================================================================
-
 const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails }) => {
 	const [currentUser, setCurrentUser] = useState({});
 	const [shouldRedirect, setShouldRedirect] = useState(false);
 
 	useEffect(() => {
-		const invalidInput = validateInput(currentUser);
+		const invalidInput = validateFormInput(currentUser);
 		const notFirstRender = Object.keys(currentUser).length;
 
 		if (!invalidInput && notFirstRender) {
@@ -28,17 +22,6 @@ const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails 
 	// =============================================
 	// 							CUSTOM HANDLERS
 	// =============================================
-	const validateInput = (form) => {
-		let fields = [];
-
-		Object.keys(form).forEach(field => {
-			if (!form[field].trim()) {
-				fields.push(field);
-			}
-		});
-		return fields.length > 0 ? fields : null;
-	};
-
 	const handleChange = () => {
 		const user = {
 			username: document.getElementById('username').value,
@@ -49,11 +32,11 @@ const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails 
 		setResponse(prev => ({ ...prev, ...user }));
 	};
 
-	const handleClick = (e) => {
+	const handleSubmit = (e) => {
 		if (!shouldRedirect) {
 			e.preventDefault();
 			if (Object.keys(currentUser).length) {
-				const invalidInputFields = validateInput(currentUser);
+				const invalidInputFields = validateFormInput(currentUser);
 
 				invalidInputFields.forEach(field => {
 					console.log(`Please fill out ${field} field and try again.`);
@@ -99,9 +82,7 @@ const AccountForm = ({ response, setResponse, accountDetails, setAccountDetails 
 			></input>
 
 			<ConditionalLink to='/shipping' condition={shouldRedirect}>
-				<button onClick={handleClick}>
-					Next
-				</button>
+				<button onClick={handleSubmit}>Next</button>
 			</ConditionalLink>
 		</form>
 	)
