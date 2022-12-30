@@ -1,14 +1,7 @@
 import React from 'react';
 
 // F2 collects ship to address (line 1, line 2, city, state, zip code) and phone number.
-const ShippingForm = ({ checkoutStage, setCheckoutStage, shippingAddr, setShippingAddr }) => {
-  const handleClick = (e) => {
-    e.preventDefault();
-    console.log('Shipping Details From State', shippingAddr);
-    console.log('Fetching Payment Details...');
-    setCheckoutStage('payment details');
-  };
-
+const ShippingForm = ({ shippingAddr, setShippingAddr }) => {
   const handleChange = (e) => {
     e.preventDefault();
 
@@ -86,7 +79,7 @@ const ShippingForm = ({ checkoutStage, setCheckoutStage, shippingAddr, setShippi
         value={shippingAddr.phone}
         onChange={handleChange}
       />
-			<button type='submit' onClick={handleClick}>Next</button>
+      <button type="submit"><a href='/payment'>Next</a></button>
 		</form>
 	)
 };

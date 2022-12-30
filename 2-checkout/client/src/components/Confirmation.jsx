@@ -1,21 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 
-const Confirmation = ({ setCheckoutStage, accountDetails,	shippingAddr,	paymentDetails }) => {
-	const handleClick = async (e) => {
-		e.preventDefault();
-		console.log('Thanks for shopping with us! You will receive a confirmation email with your order details enclosed shortly.');
-
+const Confirmation = ({ accountDetails,	shippingAddr,	paymentDetails }) => {
+	const handleClick = async () => {
 		const formResponse = {
 			...accountDetails,
 			...shippingAddr,
 			...paymentDetails
 		}
-		console.log('formResponse', formResponse);
 		await axios.post('/checkout', { ...formResponse });
-
-		// Render home page
-		setCheckoutStage('home');
 	};
 
 	return (
@@ -48,7 +41,7 @@ const Confirmation = ({ setCheckoutStage, accountDetails,	shippingAddr,	paymentD
 				<p>CVV: {paymentDetails.cvv}</p>
 				<p>Billing Zip Code: {paymentDetails.billingZip}</p>
 			</div>
-			<button onClick={handleClick}>Purchase</button>
+			<button onClick={handleClick} type="submit"><a href="/">Purchase</a></button>
 		</div>
 	)
 };

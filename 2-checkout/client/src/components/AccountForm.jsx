@@ -8,14 +8,7 @@ import React from 'react';
 // (Refactor to React Router so I can use onSubmit / required input key?)
 // =================================================================
 
-const AccountForm = ({ checkoutStage, setCheckoutStage, accountDetails, setAccountDetails }) => {
-	const handleClick = (e) => {
-		e.preventDefault();
-		console.log('Account Details From State', accountDetails);
-
-		console.log('Fetching Shipping Form...');
-		setCheckoutStage('shipping details');
-	};
+const AccountForm = ({ accountDetails, setAccountDetails }) => {
 
 	const handleChange = (e) => {
 		e.preventDefault();
@@ -64,8 +57,7 @@ const AccountForm = ({ checkoutStage, setCheckoutStage, accountDetails, setAccou
 				onChange={handleChange}
 				// required
 			/>
-
-			<button type='submit' onClick={handleClick}>Next</button>
+			<button type="submit"><a href='/shipping'>Next</a></button>
 		</form>
 	)
 };

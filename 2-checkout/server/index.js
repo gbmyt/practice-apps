@@ -31,12 +31,15 @@ app.get("/*", (req, res) => {
 	});
 });
 
+app.get('/home', (req, res) => {
+	res.send(200, 'got home');
+})
+
 app.post("/checkout", async (req, res) => {
   console.log("inside /checkout post route");
-
   const response = { ...req.body, session: req.session_id };
   console.log("Full Response w Session", response);
-  await dbSave(response);
+  // await dbSave(response);
 });
 
 app.listen(process.env.PORT);

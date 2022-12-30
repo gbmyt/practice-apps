@@ -1,15 +1,7 @@
 import React from 'react';
 
 // F3 collects credit card #, expiry date, CVV, and billing zip code.
-const PaymentForm = ({ checkoutStage, setCheckoutStage, paymentDetails, setPaymentDetails }) => {
-  const handleClick = (e) => {
-    e.preventDefault();
-    console.log('Payment Details From State', paymentDetails);
-
-    console.log('Fetching Confirmation Page...');
-    setCheckoutStage('confirmation');
-  };
-
+const PaymentForm = ({ paymentDetails, setPaymentDetails }) => {
   const handleChange = (e) => {
     e.preventDefault();
     const paymentInfo = {
@@ -64,8 +56,7 @@ const PaymentForm = ({ checkoutStage, setCheckoutStage, paymentDetails, setPayme
         value={paymentDetails.billingZip}
         onChange={handleChange}
       />
-
-			<button type='submit' onClick={handleClick}>Next</button>
+      <button type="submit"><a href='/confirmation'>Next</a></button>
 		</form>
 	)
 };
