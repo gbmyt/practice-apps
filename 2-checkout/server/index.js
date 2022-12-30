@@ -22,11 +22,21 @@ app.use(logger);
 // Serves up all static and generated assets in ../client/dist.
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.post('/checkout', async (req, res) => {
-	console.log('inside /checkout post route');
-	const response = { ...req.body, session: req.session_id };
-	console.log('Full Response w Session', response);
-	await dbSave(response);
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"), (err) => {
+		if (err) {
+			console.log(err);
+			res.status(500).send(err);
+		}
+	});
+});
+
+app.post("/checkout", async (req, res) => {
+  console.log("inside /checkout post route");
+
+  const response = { ...req.body, session: req.session_id };
+  console.log("Full Response w Session", response);
+  await dbSave(response);
 });
 
 app.listen(process.env.PORT);

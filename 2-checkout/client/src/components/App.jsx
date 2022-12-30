@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link, Routes, Route } from "react-router-dom";
 import axios from 'axios';
 
+import HomePage from './HomePage.jsx';
 import AccountForm from './AccountForm.jsx';
 import ShippingForm from './ShippingForm.jsx';
 import PaymentForm from './PaymentForm.jsx';
@@ -29,62 +31,19 @@ const App = () => {
 		billingZip: ''
 	});
 
-	const handleClick = async () => {
-		console.log('Loading F1...');
-		setCheckoutStage('account creation');
-	};
-
-	switch (checkoutStage) {
-		case ('account creation'):
-			return (
-				<AccountForm
+	return (
+		<div>
+			<Routes>
+				<Route path="/account" element={<AccountForm
 					checkoutStage={checkoutStage}
 					setCheckoutStage={setCheckoutStage}
 					accountDetails={accountDetails}
 					setAccountDetails={setAccountDetails}
-				/>
-			)
-				break;
-		case ('shipping details'):
-			return (
-				<ShippingForm
-					checkoutStage={checkoutStage}
-					setCheckoutStage={setCheckoutStage}
-					shippingAddr={shippingAddr}
-					setShippingAddr={setShippingAddr}
-				/>
-			)
-			break;
-		case ('payment details'):
-			return (
-				<PaymentForm
-					checkoutStage={checkoutStage}
-					setCheckoutStage={setCheckoutStage}
-					paymentDetails={paymentDetails}
-					setPaymentDetails={setPaymentDetails}
-				/>
-			)
-			break;
-		case ('confirmation'):
-				return (
-					<Confirmation
-						setCheckoutStage={setCheckoutStage}
-						accountDetails={accountDetails}
-						shippingAddr={shippingAddr}
-						paymentDetails={paymentDetails}
-					/>
-				)
-				break;
-		case ('home'):
-			return (
-				<div>
-					<h2>Shopping Cart 🛒</h2>
-					<button onClick={handleClick}>Checkout</button>
-				</div>
-			)
-		default:
-			return (<div>There was a problem loading your shopping cart.</div>)
-	}
+				/>}></Route>
+				<Route path="/" element={<HomePage/>}></Route>
+			</Routes>
+		</div>
+	)
 };
 
 export default App;
