@@ -85,7 +85,7 @@ ul {
   margin: 0;
 }
 
-.addForm,
+#addForm,
 .glossary > h2,
 .glossary-item,
 #searchForm {
@@ -94,7 +94,7 @@ ul {
   border-radius: 15px;
 }
 
-.addForm,
+#addForm,
 .glossary > h2,
 #searchForm {
   text-align: center;
@@ -110,10 +110,16 @@ ul {
 }
 
 /* .flex-child {
+  border: 1px solid lime;
   justify-content: center;
   align-content: center;
   text-align: center;
 } */
+
+#addTermForm {
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
 /*
 ============================
@@ -143,17 +149,32 @@ ul {
 ============================
 */
 
-.addForm > h2 {
+#addForm > h2 {
   margin-bottom: .5rem;
 }
 
+#addTermForm {
+  align-items: center;
+}
 input {
   margin: .2rem .75rem;
   border-radius: 25px;
 }
 
+#addTermForm > .flex-child > input {
+  min-width: 15rem;
+
+  margin: 1rem;
+}
+
 form > label {
   margin-top: .5rem;
+}
+
+#addTermForm > #save-word-btn {
+  border-radius: 13px;
+  height: 2rem;
+  width: auto;
 }
 
 /*
@@ -176,7 +197,7 @@ form > label {
 ============================
 */
 
-.glossary-item, .addForm {
+.glossary-item, #addForm {
   padding: 1rem;
 }
 
