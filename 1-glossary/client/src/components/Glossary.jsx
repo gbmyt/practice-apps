@@ -18,7 +18,7 @@ const Glossary = ({ words, fetchGlossary }) => {
 		)
 	} else {
 		return (
-			<h3 id="search-msg" className='glossary-item'>Whoops! I don't recognize that word, please adjust your search try again.</h3>
+			<h3 id="search-msg" className='glossary-item'>Whoops! I don't recognize that word, please adjust your search & try again.</h3>
 		)
 	}
 

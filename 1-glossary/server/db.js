@@ -47,6 +47,17 @@ let getGlossary = async (word, cb) => {
 	let data;
 	let regex =  new RegExp('^' + word + '', 'i');
 
+
+	// ========================================================
+	//												TO-DO:
+	//		Decide if this should search for exact matches
+	//						or any match within a word
+
+	//											Example:
+	// 	Should 'we' only match words beginning with "W-E-" ?
+	//	or should it also match 'E[we]r' and 'A[we]some' ??
+	// ========================================================
+
 	try {
 		if (!word) {
 			data = await Word.find({}).sort({ created_at: -1 })
