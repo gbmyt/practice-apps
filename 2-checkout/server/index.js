@@ -35,11 +35,9 @@ app.get("/*", (req, res) => {
 });
 
 app.post("/checkout", (req, res) => {
-	console.log('in checkout post route');
+	console.log('Validating Your Session...');
 
 	validateSession(req, res, (err, validated) => {
-		console.log('in checkout post route VALIDATE CB');
-
 		if (err) {
 			console.log('Checkout Error', err);
 			res.status(500).send(err);
@@ -50,14 +48,14 @@ app.post("/checkout", (req, res) => {
 			dbSave(response, (err) => {
 				if (err) {
 					console.log("Save Error", err.sqlMessage);
-					res.sendStatus(res.statusCode);
+					res.status(500).send(err);
 				} else {
-					console.log('Saved to db!');
+					console.log('Your Order Has Been Placed!');
 					res.sendStatus(res.statusCode);
 				}
 			});
 		} else {
-			console.log('Invalid Session');
+			res.status(500).send('Invalid Session');
 		}
 	});
 });

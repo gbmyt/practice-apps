@@ -2,35 +2,16 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
-const Confirmation = ({ response, paymentStatus, setPaymentStatus }) => {
-	const handleClick = () => {
-		console.log('Payment status pre-POST', paymentStatus);
-		axios.post('/checkout', { ...response }, (err, data) => {
-			console.log("data", err);
-			console.log("data", data);
-		});
-		// if (!paymentStatus) {
-		// 	setPaymentStatus(true);
-		// 	console.log('Form Response', response);
-
-		// 	// =============================================
-		// 	//        TO-DO: What I want to write:
-		// 	// if (invalidSession) {
-		// 	// 	alert('You already placed this order! Check your email for confirmation details.');
-		// 	// }
-		// 	// =============================================
-		// 	await axios.post('/checkout', { ...response });
-		// } else if (paymentStatus) {
-		// 	// =============================================
-		// 	//                  TO-DO:
-		// 	// This operates off of payment status in state
-
-		// 	// Refactor to check actual session ID in addition
-		// 	// 			to checking paymentState variable
-		// 	// =============================================
-
-		// 	alert('You already placed this order! Check your email for confirmation details.');
-		// }
+const Confirmation = ({ response }) => {
+	const handleClick = async () => {
+		try {
+			await axios.post('/checkout', { ...response });
+		} catch (err) {
+			if (err.response.data === "Invalid Session") {
+				alert('You can only place an order once. Please check your email for confirmation details. Thanks for shopping with us!');
+			}
+			console.log(err);
+		}
 	};
 
 	return (

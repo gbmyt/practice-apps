@@ -11,7 +11,6 @@ import Confirmation from "./Confirmation.jsx";
 const validateFormInput = require('../../../utils/validateFormInput').validateFormInput;
 
 const App = () => {
-	const [paymentStatus, setPaymentStatus] = useState(false);
 	const [shouldRedirect, setShouldRedirect] = useState(false);
 	const [formFields, setFormFields] = useState({});
 	const notFirstRender = Object.keys(formFields).length;
@@ -50,7 +49,7 @@ const App = () => {
   return (
     <div className="custom-component" >
       <Routes>
-				<Route path="/" element={<HomePage paymentStatus={paymentStatus} />}/>
+				<Route path="/" element={<HomePage />}/>
 				<Route
           path="/account"
           element={
@@ -109,8 +108,6 @@ const App = () => {
           element={
             <Confirmation
 							response={response}
-							paymentStatus={paymentStatus}
-							setPaymentStatus={setPaymentStatus}
             />
           }
         />
