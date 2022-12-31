@@ -3,31 +3,34 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const Confirmation = ({ response, paymentStatus, setPaymentStatus }) => {
-	const handleClick = async () => {
-		// console.log('Payment status', paymentStatus);
+	const handleClick = () => {
+		console.log('Payment status pre-POST', paymentStatus);
+		axios.post('/checkout', { ...response }, (err, data) => {
+			console.log("data", err);
+			console.log("data", data);
+		});
+		// if (!paymentStatus) {
+		// 	setPaymentStatus(true);
+		// 	console.log('Form Response', response);
 
-		if (!paymentStatus) {
-			setPaymentStatus(true);
-			// console.log('Form Response', response);
+		// 	// =============================================
+		// 	//        TO-DO: What I want to write:
+		// 	// if (invalidSession) {
+		// 	// 	alert('You already placed this order! Check your email for confirmation details.');
+		// 	// }
+		// 	// =============================================
+		// 	await axios.post('/checkout', { ...response });
+		// } else if (paymentStatus) {
+		// 	// =============================================
+		// 	//                  TO-DO:
+		// 	// This operates off of payment status in state
 
-			// =============================================
-			//        TO-DO: What I want to write:
-			// if (invalidSession) {
-			// 	alert('You already placed this order! Check your email for confirmation details.');
-			// }
-			// =============================================
-			await axios.post('/checkout', { ...response });
-		} else {
-			// =============================================
-			//                  TO-DO:
-			// This operates off of payment status in state
+		// 	// Refactor to check actual session ID in addition
+		// 	// 			to checking paymentState variable
+		// 	// =============================================
 
-			// Refactor to check actual session ID in addition
-			// 			to checking paymentState variable
-			// =============================================
-
-			alert('You already placed this order! Check your email for confirmation details.');
-		}
+		// 	alert('You already placed this order! Check your email for confirmation details.');
+		// }
 	};
 
 	return (

@@ -63,10 +63,8 @@ let dbSave = (response, cb) => {
 
   connection.query(saveResponseQuery, Object.values(response), (err) => {
     if (err) {
-      console.log('There was a problem saving to the database.', err);
       cb(err);
     } else {
-      console.log('Saved to database!');
       cb(null);
     }
   });

@@ -35,24 +35,29 @@ app.get("/*", (req, res) => {
 });
 
 app.post("/checkout", (req, res) => {
-	validateSession(req, res, (err, validated, payload) => {
+	console.log('in checkout post route');
+
+	validateSession(req, res, (err, validated) => {
+		console.log('in checkout post route VALIDATE CB');
+
 		if (err) {
 			console.log('Checkout Error', err);
 			res.status(500).send(err);
-		} else if (!validated) {
-			res.status(500).send('Whoops! You can only place an order once. Check your email for confirmation details!');
 		} else if (validated) {
 			const response = { ...req.body, Session: req.session_id };
 			// console.log("Full Response w Session", response);
 
-			dbSave(response, (err, data) => {
+			dbSave(response, (err) => {
 				if (err) {
-					console.log("Save Error", err);
-					res.status(500).send(err);
+					console.log("Save Error", err.sqlMessage);
+					res.sendStatus(res.statusCode);
 				} else {
+					console.log('Saved to db!');
 					res.sendStatus(res.statusCode);
 				}
 			});
+		} else {
+			console.log('Invalid Session');
 		}
 	});
 });
