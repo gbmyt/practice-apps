@@ -13,10 +13,12 @@ const db = Promise.promisifyAll(connection, { multiArgs: true });
 
 // ======================================================
 //                      TO-DOs:
-//    Figure out if theres a better way to create
+// 1.   Figure out if theres a better way to create
 //     checkout db (package.json script currently)
+//
+// 2. Refactor `CREATE TABLE` statement to accept only
+//      correct data types (INT for CC, CVV, etc.)
 // ======================================================
-
 db.connectAsync()
   .then(() => console.log(`Connected to MySQL as id: ${db.threadId}`))
   .then(() =>
@@ -28,16 +30,18 @@ db.connectAsync()
         password VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
         addrOne VARCHAR(255) NOT NULL,
-        addrTwo VARCHAR(255) NOT NULL,
+        addrTwo VARCHAR(255),
         city VARCHAR(255) NOT NULL,
         state VARCHAR(255) NOT NULL,
         zip VARCHAR(5) NOT NULL,
         phone VARCHAR(10),
         cc VARCHAR(255) NOT NULL,
-        expiry VARCHAR(5) NOT NULL,
-        cvv INT NOT NULL,
+        expiry VARCHAR(255) NOT NULL,
+        cvv VARCHAR(4) NOT NULL,
         billingZip VARCHAR(6) NOT NULL,
-        session VARCHAR(255) NOT NULL
+        session VARCHAR(255) NOT NULL,
+        UNIQUE(id),
+        UNIQUE(session)
       )`
     )
   )
@@ -49,22 +53,21 @@ db.connectAsync()
     }
   });
 
-// FRAGILE: No validation before attempting to save, fails silently
-let dbSave = response => {
+let dbSave = (response, cb) => {
   connection.connect();
-  console.log('inside db save func');
 
-  const getUsersQuery = `SELECT * FROM users;`;
   const saveResponseQuery = `INSERT INTO
-    responses(username, password, email, addrOne, addrTwo, city, state, zip, phone, cc, expiry, cvv, billingZip, session)
+    responses(username, password, email, session, addrOne, addrTwo, city, state, zip, phone, cc, expiry, cvv, billingZip)
     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-  connection.query(saveResponseQuery, Object.values(response), (err, data) => {
+  connection.query(saveResponseQuery, Object.values(response), (err) => {
     if (err) {
-      console.log(err);
+      console.log('There was a problem saving to the database.', err);
+      cb(err);
     } else {
       console.log('Saved to database!');
+      cb(null);
     }
   });
 };
