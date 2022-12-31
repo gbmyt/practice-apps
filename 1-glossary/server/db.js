@@ -45,15 +45,16 @@ const Word = mongoose.model('Word', wordSchema);
 // ==================================
 let getGlossary = async (word, cb) => {
 	let data;
+	let regex =  new RegExp('^' + word + '', 'i');
 
 	try {
 		if (!word) {
 			data = await Word.find({}).sort({ created_at: -1 })
 		} else if (word) {
-			data = await Word.findOne({ name: word });
-			console.log('Got one word', data);
+			data = await Word.find({ name: regex });
+			console.log('Got word(s)', data);
 		}
-		cb(null, data); // Failing silently when you search a non-existent word (?)
+		cb(null, data);
 	} catch (err) {
 		cb(err);
 	}

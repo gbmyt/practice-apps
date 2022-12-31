@@ -6,7 +6,7 @@ import Form from './Form';
 import SearchBar from './SearchBar';
 
 const App = () => {
-	const [glossary, setGlossary] = useState({});
+	const [glossary, setGlossary] = useState([]);
 	const [searchTerm, setSearchTerm] = React.useState('');
 
 	useEffect(() => {
@@ -25,18 +25,21 @@ const App = () => {
 	}, [searchTerm]);
 
 	// ==================================================================
-	//   TO-DO: Searching a non-existant term should return an Error
+	//   				TO-DO: Search should be case-insensitive
 	// ==================================================================
 	const search = async () => {
-		if (searchTerm.length) {
-			let word = await axios.get(`/${searchTerm}`);
 
-			if(!word.data) {
+		if (searchTerm.length) {
+			let result = await axios.get(`/${searchTerm}`);
+
+			if(!result.data.length) {
 				console.log('We couldn\'t find that word. Try again');
-				setGlossary([]);
+				setGlossary({});
 			} else {
-				setGlossary([{ ...word.data }]);
+				setGlossary(result.data);
 			}
+		} else if (searchTerm.length === 0) {
+			fetchGlossary();
 		}
 	};
 
