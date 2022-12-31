@@ -9,18 +9,36 @@ const Form = ({ fetchGlossary }) => {
 		const formObj = document.getElementById('addTermForm');
 
 		let newTerm = {
-			name: e.target.querySelector('#addTermWordInput').value || 'Default Name',
-			definition: e.target.querySelector('#addTermDefInput').value || 'Default Def',
-			example: e.target.querySelector('#addTermExInput').value || 'Default Example'
+			name: e.target.querySelector('#addTermWordInput').value || '',
+			definition: e.target.querySelector('#addTermDefInput').value || '',
+			example: e.target.querySelector('#addTermExInput').value || ''
 		};
-
-		console.log('Adding Term:', newTerm);
 
 		try {
 			await axios.post('/create', { newTerm });
 			formObj.reset();
 		} catch (err) {
-			alert('This word can only be added to glossary once. Try adding a different word.');
+			const error = Object.values(err);
+
+			if (error[2]['data']) {
+				const errType = error[2]['data'];
+				console.log('Error Type', errType);
+
+				switch (errType) {
+					case 'Duplicate Word Error':
+						alert('Whoops! This word can only be added to glossary once. Try again. 😬');
+						break;
+					case 'Name is required.':
+						alert('Whoops! Field: Name is required. Please adjust and try again. 😬');
+						break;
+					case 'Definition is required.':
+						alert('Whoops! Field: Definition is required. Please adjust and try again. 😬');
+						break;
+
+					default:
+						alert('Sorry, there was a problem saving to glossary 😬');
+				}
+			}
 		}
 		fetchGlossary();
 	};

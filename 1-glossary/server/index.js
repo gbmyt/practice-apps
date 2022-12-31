@@ -47,7 +47,11 @@ app.post('/create', (req, res) => {
 		if (err) {
 			if (err.code === 11000) {
 				res.status(500).send('Duplicate Word Error');
-			} else if (err.code !== 11000) {
+			} else if (err.errors.name) {
+				res.status(500).send('Name is required.');
+			} else if (err.errors.definition) {
+				res.status(500).send('Definition is required.');
+			} else {
 				res.status(500).send(err);
 			}
 		} else {

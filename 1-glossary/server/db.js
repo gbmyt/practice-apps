@@ -85,18 +85,12 @@ let dbSave = async (term, cb) => {
 		console.log('Saved to database!');
 		cb();
   } catch (err) {
-		console.error('Caught db Save Error');
+		console.error('Caught db Save Error', Object.values(err));
 		cb(err);
   }
 };
 
 let dbUpdate = (term, cb) => {
-	console.log(
-		'In dbUpdate', term.name,
-		'Def', term.definition,
-		'Ex', term.example
-	);
-
 	Word.findOne({ _id: term.id }, (err, word) => {
 		if (err) {
 			cb(err);

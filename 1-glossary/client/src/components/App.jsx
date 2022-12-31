@@ -13,20 +13,15 @@ const App = () => {
 		fetchGlossary();
 	}, []);
 
+	useEffect(() => {
+		search();
+	}, [searchTerm]);
+
 	const fetchGlossary = async () => {
 		const words = await axios.get('/glossary');
 		setGlossary(words.data);
 	};
 
-	// Was searching on searchTerm change,
-	// went back to using submit button
-	useEffect(() => {
-		search();
-	}, [searchTerm]);
-
-	// ==================================================================
-	//   TO-DO: Erorr-handling for attempts to save the same word twice
-	// ==================================================================
 	const search = async () => {
 
 		if (searchTerm.length) {
