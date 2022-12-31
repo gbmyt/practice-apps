@@ -27,6 +27,8 @@ const wordSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	type: String,
+	pronunciation: String,
 	example: String,
 	created_at: {
 		type: Date,
@@ -50,12 +52,14 @@ let getGlossary = async (word, cb) => {
 
 	// ========================================================
 	//												TO-DO:
-	//		Decide if this should search for exact matches
+	//	1.	Decide if this should search for exact matches
 	//						or any match within a word
 
 	//											Example:
 	// 	Should 'we' only match words beginning with "W-E-" ?
 	//	or should it also match 'E[we]r' and 'A[we]some' ??
+
+	//	2. Capitalize first letter of each new term ??
 	// ========================================================
 
 	try {
@@ -76,8 +80,10 @@ let dbSave = async (term, cb) => {
 
 	const newWord = new Word ({
 		name: term.name,
+		type: term.type,
+		pronunciation: term.pronunciation ? '/' + term.pronunciation + '/' : '',
 		definition: term.definition,
-		example: term.example || 'An example sentence was not provided.'
+		example: term.example || 'An example wasn\'t provided. Hint: Add an example sentence so we know how to use this word!'
 	});
 
 	try {

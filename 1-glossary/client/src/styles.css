@@ -107,6 +107,7 @@ ul {
 */
 .flex-parent {
   display: flex;
+  align-items: center;
 }
 
 /* .flex-child {
@@ -156,6 +157,7 @@ ul {
 #addTermForm {
   align-items: center;
 }
+
 input {
   margin: .2rem .75rem;
   border-radius: 25px;
@@ -163,7 +165,6 @@ input {
 
 #addTermForm > .flex-child > input {
   min-width: 15rem;
-
   margin: 1rem;
 }
 
@@ -205,7 +206,6 @@ form > label {
   margin-bottom: 1rem;
   justify-content: space-between;
   flex-wrap: wrap;
-  border: 1px solid silver;
 }
 
 li > span.bold {
@@ -215,4 +215,29 @@ li > span.bold {
 .example {
   font-size: .875rem;
   font-style: italic;
+}
+
+h5  {
+  font-size: 1.3rem;
+}
+
+.word-type {
+  font-style: italic;
+}
+
+.pronunciation {
+  font-weight: bold;
+}
+
+.word-type, .pronunciation {
+  font-size: .8rem;
+}
+
+.pad-sides, .word-type, .pronunciation {
+  margin-left: .32rem;
+}
+
+.style-me {
+  border-radius: 13px;
+  padding: 0 1rem;
 }

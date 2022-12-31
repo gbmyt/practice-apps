@@ -60,12 +60,19 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 		}
 	};
 
+	const wordPronunciation = <span className="pronunciation">{ word.pronunciation }</span>;
+	const wordType =  <span className="word-type"> { word.type }</span>;
+
   return (
     <div className="glossary-item flex-parent">
 			{ !editMode ?
 				(<li>
-					<span className="bold">{ word.name }</span>: { word.definition}
-					<br />
+					<div className="flex-parent">
+						<h5 className="bold">{ word.name }</h5> {word.pronunciation ? wordPronunciation : <></>} { word.type? <div className='pad-sides'>|</div> : <></> } {word.type ? wordType : <></>}
+					</div>
+
+
+					<div>{ word.definition }</div>
 					<div className="example">{ word.example }</div>
 				</li>) :
 

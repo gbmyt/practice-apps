@@ -6,10 +6,13 @@ const Form = ({ fetchGlossary }) => {
 	// save new term to database and re-render glossary list
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
 		const formObj = document.getElementById('addTermForm');
 
 		let newTerm = {
 			name: e.target.querySelector('#addTermWordInput').value || '',
+			type: e.target.querySelector('#addTermTypeInput').value || '',
+			pronunciation: e.target.querySelector('#addTermPronunciationInput').value || '',
 			definition: e.target.querySelector('#addTermDefInput').value || '',
 			example: e.target.querySelector('#addTermExInput').value || ''
 		};
@@ -71,6 +74,25 @@ const Form = ({ fetchGlossary }) => {
 						name="example"
 						id="addTermExInput"
 						placeholder="Use it in a sentence"
+					/>
+				</div>
+
+				<div className="flex-child">
+					<select id="addTermTypeInput" className='style-me' name="word-types">
+						<option value="">Word Type</option>
+						<option value="noun">noun</option>
+						<option value="verb">verb</option>
+						<option value="adverb">adverb</option>
+						<option value="adjective">adjective</option>
+					</select>
+				</div>
+
+				<div className="flex-child">
+					<input
+						type="text"
+						name="pronunciation"
+						id="addTermPronunciationInput"
+						placeholder="How is it pronounced?"
 					/>
 				</div>
 
