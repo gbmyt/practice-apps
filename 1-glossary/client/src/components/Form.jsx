@@ -78,7 +78,7 @@ const Form = ({ fetchGlossary }) => {
 				</div>
 
 				<div className="flex-child">
-					<select id="addTermTypeInput" className='style-me' name="word-types">
+					<select id="addTermTypeInput" name="word-type">
 						<option value="">Word Type</option>
 						<option value="noun">noun</option>
 						<option value="verb">verb</option>

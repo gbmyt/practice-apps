@@ -7,12 +7,15 @@ import axios from "axios";
 const GlossaryItem = ({ word, words, fetchGlossary }) => {
 	const [editMode, setEditMode] = useState(false);
 	const [currentName, setCurrentName] = useState('');
+	const [currenType, setCurrentType] = useState('');
+	const [currentPronunciation, setCurrentPronunciation] = useState('');
 	const [currentDef, setCurrentDef] = useState('');
 	const [currentEx, setCurrentEx] = useState('');
 
 	useEffect(() => {
 		if (word) {
 			setCurrentName(word.name);
+			setCurrentPronunciation(word.pronunciation);
 			setCurrentDef(word.definition);
 			setCurrentEx(word.example);
 		}
@@ -30,6 +33,8 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 			const newWord = {
 				id: word._id,
 				name: document.getElementById('editTermWordInput').value,
+				// type: document.getElementById('addTermTypeInput').value || '',
+				pronunciation: document.getElementById('editTermPronunciationInput').value || '',
 				definition: document.getElementById('editTermDefInput').value,
 				example: document.getElementById('editTermExInput').value
 			};
@@ -52,6 +57,9 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 			case 'definition':
 				setCurrentDef(e.target.value);
 				break;
+			case 'pronunciation':
+				setCurrentPronunciation(e.target.value);
+				break;
 			case 'example':
 				setCurrentEx(e.target.value);
 				break;
@@ -60,7 +68,7 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 		}
 	};
 
-	const wordPronunciation = <span className="pronunciation">{ word.pronunciation }</span>;
+	const wordPronunciation = <span className="pronunciation">/{ word.pronunciation }/</span>;
 	const wordType =  <span className="word-type"> { word.type }</span>;
 
   return (
@@ -102,6 +110,24 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 						id="editTermExInput"
 						value={currentEx}
 						onChange={handleChange}
+					/>
+
+					<label htmlFor="word-type">Type</label>
+					<select id="editTermTypeInput" name="word-type">
+						<option value="">Word Type</option>
+						<option value="noun">noun</option>
+						<option value="verb">verb</option>
+						<option value="adverb">adverb</option>
+						<option value="adjective">adjective</option>
+					</select>
+
+					<label htmlFor="pronunciation">Pronunciation</label>
+						<input
+							type="text"
+							name="pronunciation"
+							id="editTermPronunciationInput"
+							value={currentPronunciation}
+							onChange={handleChange}
 					/>
 				</li>)
 			}

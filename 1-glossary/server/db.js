@@ -76,12 +76,12 @@ let getGlossary = async (word, cb) => {
 };
 
 let dbSave = async (term, cb) => {
-	console.log('Saving word...');
+	console.log('Saving word to database...');
 
 	const newWord = new Word ({
 		name: term.name,
 		type: term.type,
-		pronunciation: term.pronunciation ? '/' + term.pronunciation + '/' : '',
+		pronunciation: term.pronunciation,
 		definition: term.definition,
 		example: term.example || 'An example wasn\'t provided. Hint: Add an example sentence so we know how to use this word!'
 	});
@@ -102,12 +102,14 @@ let dbUpdate = (term, cb) => {
 			cb(err);
 		} else {
 			word.name = term.name;
+			word.type = term.type;
+			word.pronunciation = term.pronunciation;
 			word.definition = term.definition;
 			word.example = term.example;
 
 			word.save()
-				.then(() => {
-					console.log('Updated!');
+				.then((result) => {
+					console.log('Updated!', result);
 					cb();
 				})
 				.catch(err => {
