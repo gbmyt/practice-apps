@@ -52,7 +52,7 @@ let getGlossary = async (word, cb) => {
 			data = await Word.find({}).sort({ created_at: -1 })
 		} else if (word) {
 			data = await Word.find({ name: regex });
-			console.log('Got word(s)', data);
+			// console.log('Got word(s)', data);
 		}
 		cb(null, data);
 	} catch (err) {
