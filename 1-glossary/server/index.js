@@ -45,9 +45,13 @@ app.get('/:term', (req, res) => {
 app.post('/create', (req, res) => {
 	dbSave(req.body.newTerm, (err) => {
 		if (err) {
-			res.status(res.statusCode).send('Error Saving New Term');
+			if (err.code === 11000) {
+				res.status(500).send('Duplicate Word Error');
+			} else if (err.code !== 11000) {
+				res.status(500).send(err);
+			}
 		} else {
-			res.status(res.statusCode).send('Saved!');
+			res.status(201).send('Saved!');
 		}
 	});
 });

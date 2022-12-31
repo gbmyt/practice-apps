@@ -72,11 +72,10 @@ let dbSave = async (term, cb) => {
 	try {
     await newWord.save()
 		console.log('Saved to database!');
-  } catch (err) {
-		console.error('Caught Error:', err.name + "\n" + err.message);
-		cb(err);
-  } finally {
 		cb();
+  } catch (err) {
+		console.error('Caught db Save Error');
+		cb(err);
   }
 };
 

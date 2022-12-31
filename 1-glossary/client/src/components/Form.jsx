@@ -6,6 +6,7 @@ const Form = ({ fetchGlossary }) => {
 	// save new term to database and re-render glossary list
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const formObj = document.getElementById('addTermForm');
 
 		let newTerm = {
 			name: e.target.querySelector('#addTermWordInput').value || 'Default Name',
@@ -14,12 +15,18 @@ const Form = ({ fetchGlossary }) => {
 		};
 
 		console.log('Adding Term:', newTerm);
-		await axios.post('/create', { newTerm });
+
+		try {
+			await axios.post('/create', { newTerm });
+			formObj.reset();
+		} catch (err) {
+			alert('This word can only be added to glossary once. Try adding a different word.');
+		}
 		fetchGlossary();
 	};
 
 	return (
-		<div className='addForm'>
+		<div id='addForm'>
 			<h2>Add New Word</h2>
 			<form className="flex-parent" id="addTermForm" onSubmit={handleSubmit}>
 				<div className="flex-child">
@@ -49,7 +56,7 @@ const Form = ({ fetchGlossary }) => {
 					/>
 				</div>
 
-				<button type="submit">Save Word</button>
+				<button type="submit" id="save-word-btn">Save Word</button>
 			</form>
 		</div>
 	)

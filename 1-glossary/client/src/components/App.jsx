@@ -25,7 +25,7 @@ const App = () => {
 	}, [searchTerm]);
 
 	// ==================================================================
-	//   				TO-DO: Search should be case-insensitive
+	//   TO-DO: Erorr-handling for attempts to save the same word twice
 	// ==================================================================
 	const search = async () => {
 
