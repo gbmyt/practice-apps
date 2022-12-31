@@ -3,7 +3,9 @@ const validateFormInput = (form) => {
 
 	Object.keys(form).forEach(field => {
 		if (!form[field].trim()) {
-			fields.push(field);
+			if(!["AddrTwo", "Phone"].includes(field)) {
+				fields.push(field);
+			}
 		}
 	});
 	return fields.length > 0 ? fields : null;
