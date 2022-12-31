@@ -20,9 +20,9 @@ const App = () => {
 
 	// Was searching on searchTerm change,
 	// went back to using submit button
-	// useEffect(() => {
-	// 	search();
-	// }, [searchTerm]);
+	useEffect(() => {
+		search();
+	}, [searchTerm]);
 
 	// ==================================================================
 	//   TO-DO: Searching a non-existant term should return an Error
@@ -30,8 +30,13 @@ const App = () => {
 	const search = async () => {
 		if (searchTerm.length) {
 			let word = await axios.get(`/${searchTerm}`);
-			console.log('Word', word);
-			setGlossary([{ ...word.data }]);
+
+			if(!word.data) {
+				console.log('We couldn\'t find that word. Try again');
+				setGlossary([]);
+			} else {
+				setGlossary([{ ...word.data }]);
+			}
 		}
 	};
 

@@ -1,18 +1,27 @@
 require("dotenv").config();
 const path = require('path');
-
 const express = require('express');
+
 const app = express();
 var port = 3000;
 
+// =============================================
+//             DB Utility Methods:
+// =============================================
 const dbSave = require('./db').dbSave;
 const dbUpdate = require('./db').dbUpdate;
 const dbDelete = require('./db').dbDelete;
 const getGlossary = require('./db').getGlossary;
 
+// =============================================
+//                Middleware:
+// =============================================
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
+// =============================================
+//               Server Routes
+// =============================================
 app.get('/glossary', (req, res) => {
 	getGlossary(null, (err, words) => {
 		if (err) {

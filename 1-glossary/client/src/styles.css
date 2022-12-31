@@ -133,6 +133,10 @@ ul {
   width: 4rem;
 }
 
+#search-msg {
+  text-align: center;
+}
+
 /*
 ============================
       Add Form Styles
