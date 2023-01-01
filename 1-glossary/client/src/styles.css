@@ -99,6 +99,10 @@ ul {
   text-align: center;
 }
 
+#search-msg {
+  margin-top: 2rem;
+}
+
 /*
 ============================
          Flexbox
