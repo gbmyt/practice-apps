@@ -200,6 +200,7 @@ form > label {
 
 .glossary-item, #addForm {
   padding: 1rem;
+  border: 1px solid silver;
 }
 
 .glossary-item {

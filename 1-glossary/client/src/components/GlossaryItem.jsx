@@ -7,7 +7,7 @@ import axios from "axios";
 const GlossaryItem = ({ word, words, fetchGlossary }) => {
 	const [editMode, setEditMode] = useState(false);
 	const [currentName, setCurrentName] = useState('');
-	const [currenType, setCurrentType] = useState('');
+	const [currentType, setCurrentType] = useState('');
 	const [currentPronunciation, setCurrentPronunciation] = useState('');
 	const [currentDef, setCurrentDef] = useState('');
 	const [currentEx, setCurrentEx] = useState('');
@@ -15,6 +15,7 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 	useEffect(() => {
 		if (word) {
 			setCurrentName(word.name);
+			setCurrentType(word.type);
 			setCurrentPronunciation(word.pronunciation);
 			setCurrentDef(word.definition);
 			setCurrentEx(word.example);
@@ -33,7 +34,7 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 			const newWord = {
 				id: word._id,
 				name: document.getElementById('editTermWordInput').value,
-				// type: document.getElementById('addTermTypeInput').value || '',
+				type: document.getElementById('editTermTypeInput').value || '',
 				pronunciation: document.getElementById('editTermPronunciationInput').value || '',
 				definition: document.getElementById('editTermDefInput').value,
 				example: document.getElementById('editTermExInput').value
@@ -54,11 +55,14 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 			case 'name':
 				setCurrentName(e.target.value);
 				break;
-			case 'definition':
-				setCurrentDef(e.target.value);
+			case 'word-type':
+				setCurrentType(e.target.value);
 				break;
 			case 'pronunciation':
 				setCurrentPronunciation(e.target.value);
+				break;
+			case 'definition':
+				setCurrentDef(e.target.value);
 				break;
 			case 'example':
 				setCurrentEx(e.target.value);
@@ -113,8 +117,8 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 					/>
 
 					<label htmlFor="word-type">Type</label>
-					<select id="editTermTypeInput" name="word-type">
-						<option value="">Word Type</option>
+					<select id="editTermTypeInput" name="word-type" value={currentType} onChange={handleChange}>
+						<option value="">None</option>
 						<option value="noun">noun</option>
 						<option value="verb">verb</option>
 						<option value="adverb">adverb</option>

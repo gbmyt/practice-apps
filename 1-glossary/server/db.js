@@ -101,6 +101,8 @@ let dbUpdate = (term, cb) => {
 		if (err) {
 			cb(err);
 		} else {
+			console.log('word type', word.type);
+
 			word.name = term.name;
 			word.type = term.type;
 			word.pronunciation = term.pronunciation;
