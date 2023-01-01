@@ -32,6 +32,13 @@ const seedWords = [
 		example: 'The pernicious effects of air pollution'
 	},
 	{
+		name: 'Malaprop',
+		type: 'noun',
+		pronunciation: 'ˈmaləˌpräp',
+		definition: 'The mistaken use of a word in place of a similar-sounding one, often with unintentionally amusing effect',
+		example: 'As in, for example, “dance a flamingo” (instead of flamenco).'
+	},
+	{
 		name: 'Convivial',
 		type: 'adjective',
 		pronunciation: 'kənˈvivēəl',
@@ -51,6 +58,13 @@ const seedWords = [
 		pronunciation: 'drəˈkōnēən,drāˈkōnēən',
 		definition: 'Excessively harsh and severe.',
 		example: 'The new parking fines are positively draconian.'
+	},
+	{
+		name: 'Melancholic',
+		type: 'adjective',
+		pronunciation: 'ˌmel(ə)nˈkälik',
+		definition: 'feeling or expressing pensive sadness',
+		example: 'His work often has a wistful or melancholic mood | a haunting, melancholic melody.'
 	},
 	{
 		name: 'Serendipity',

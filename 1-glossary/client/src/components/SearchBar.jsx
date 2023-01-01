@@ -1,6 +1,15 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 
+// ==================================================
+//										TO-DO:
+// 	When searchbar loses focus either clear the form
+// or bring filter back when other action is complete
+
+//  (when you searh a term, then edit, search term
+//	 	remains on "save", but glossary re-renders)
+// ==================================================
+
 const SearchBar = ({ onSearch, searchTerm, setSearchTerm }) => {
 	const search = (e) => {
 		e.preventDefault();
