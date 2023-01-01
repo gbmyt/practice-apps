@@ -136,8 +136,16 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 			}
 
       <div>
-				<button onClick={handleUpdate}>{ editMode ? 'Save' : 'Edit' }</button>
-        <button onClick={deleteWord}>Delete</button>
+				<button
+					className="button"
+					id="edit-btn"
+					onClick={handleUpdate}
+				>{ editMode ? '✔': '✍🏼' }</button>
+        <button
+					className="button"
+					id="delete-btn"
+					onClick={deleteWord}
+				>🗑️</button>
       </div>
     </div>
   );

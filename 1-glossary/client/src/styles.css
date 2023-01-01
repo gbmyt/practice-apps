@@ -69,7 +69,7 @@ main {
 
 /*
 ============================
-        Mixed Styles
+  Mixed & Universal Styles
 ============================
 */
 
@@ -103,6 +103,27 @@ ul {
   margin-top: 2rem;
 }
 
+.button {
+  border-radius: 18px;
+  /* border: 1.5px solid rgb(44, 44, 44); */
+  /* box-shadow: 3px 3.5px 3px rgb(47, 47, 47); */
+  /* background-color: rgb(238, 211, 255); */
+}
+
+/* .button:active {
+  box-shadow: inset 2.5px 3px 1.7px rgb(47, 47, 47);
+  background-color: rgb(238, 211, 255);
+} */
+
+select {
+  -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  min-width: 6.5rem;
+  border: 2px solid rgba(47, 79, 79, .865);
+  box-shadow: inset 2px 2px 2px rgba(49, 54, 54, .5);
+}
+
 /*
 ============================
          Flexbox
@@ -119,12 +140,6 @@ form.flex-parent {
   flex-wrap: wrap;
 }
 
-/* .flex-child {
-  border: 1px solid lime;
-  align-content: center;
-  text-align: center;
-} */
-
 
 /*
 ============================
@@ -140,10 +155,6 @@ form.flex-parent {
   min-width: 375px;
 }
 
-.submit-search-btn {
-  width: 4rem;
-}
-
 #search-msg {
   text-align: center;
 }
@@ -151,6 +162,10 @@ form.flex-parent {
 input::placeholder {
   font-style: italic;
   padding: .5rem;
+}
+
+#search-icon {
+  padding-left: .25rem;
 }
 
 /*
@@ -169,6 +184,11 @@ input::placeholder {
 
 #addTermForm {
   align-items: center;
+}
+
+#addForm > select {
+  padding: 5rem;
+  min-width: 12rem;
 }
 
 /*
@@ -192,9 +212,8 @@ input {
 }
 
 #addTermForm > #save-word-btn {
-  border-radius: 13px;
   height: auto;
-  width: 6.8rem;
+  width: 5rem;
   padding: .125rem 0;
   margin: .85rem 0 .35rem 0;
 }
@@ -214,17 +233,12 @@ input {
 }
 
 /*
-============================
       Glossary Item
-============================
 */
 
 .glossary-item {
   padding: 1rem;
   border: 1px solid silver;
-}
-
-.glossary-item {
   margin-bottom: 1rem;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -237,6 +251,7 @@ li > span.bold {
 .example {
   font-size: .875rem;
   font-style: italic;
+  margin-bottom: .75rem;
 }
 
 h5  {
@@ -257,4 +272,16 @@ h5  {
 
 .pad-sides, .word-type, .pronunciation {
   margin-left: .32rem;
+}
+
+#edit-btn,
+#delete-btn {
+  min-width: 2.5rem;
+  padding: .5rem .8rem;
+  border-radius: 45%;
+  font-size: 1.1rem;
+}
+
+#delete-btn {
+  margin: .75rem;
 }

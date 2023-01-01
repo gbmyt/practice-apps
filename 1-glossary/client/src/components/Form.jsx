@@ -29,8 +29,6 @@ const Form = ({ fetchGlossary }) => {
 		<div className='container'>
 			<h3>Add A Word</h3>
 			<form className="flex-parent" id="addTermForm" onSubmit={handleSubmit}>
-				<div className="flex-child">
-
 					<input
 						type="text"
 						name="name"
@@ -70,9 +68,8 @@ const Form = ({ fetchGlossary }) => {
 						<option value="adverb">adverb</option>
 						<option value="adjective">adjective</option>
 					</select>
-				</div>
 
-				<button type="submit" id="save-word-btn">Save Word</button>
+				<button type="submit" className="button" id="save-word-btn">Save</button>
 			</form>
 		</div>
 	)

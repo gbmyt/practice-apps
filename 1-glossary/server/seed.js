@@ -6,7 +6,7 @@ const seedWords = [
 	{
 		name: 'Antidisestablishmentarianism',
 		type: 'noun',
-		pronunciation: 'ˌanˌtīˌdisəsˌtabliSHmənˈterēəˌniz(ə)m,ˌan(t)ēˌdisəsˌtabliSHmənˈterēəˌniz(ə)m',
+		pronunciation: 'ˌanˌtīˌdisəsˌtabliSHmənˈterēəˌniz(ə)m',
 		definition: 'Opposition to the disestablishment of the Church of England.',
 		example: 'I never realized that you leaned toward antidisestablishmentarianism'
 	},

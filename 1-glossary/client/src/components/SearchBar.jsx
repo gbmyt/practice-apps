@@ -19,7 +19,7 @@ const SearchBar = ({ onSearch, searchTerm, setSearchTerm }) => {
 	return (
 		<div className="form">
 			<form id="searchForm" >
-				<label htmlFor="search">Search 🔍</label>
+				<label htmlFor="search">Search <span id='search-icon'>🔍</span></label>
 				<input
 					type="text"
 					name="search"
