@@ -63,10 +63,17 @@ app.post('/create', (req, res) => {
 app.post('/update/:id', (req, res) => {
 	dbUpdate(req.body.newWord, (err) => {
 		if (err) {
-			console.error(err);
-			res.status(res.statusCode).send('Error Updating Term');
+			if (err.code === 11000) {
+				res.status(500).send('Duplicate Word Error');
+			} else if (err.errors.name) {
+				res.status(500).send('Name is required.');
+			} else if (err.errors.definition) {
+				res.status(500).send('Definition is required.');
+			} else {
+				res.status(500).send('Error Updating Term');
+			}
 		} else {
-			res.status(res.statusCode).send('Updated!');
+			res.status(201).send('Updated!');
 		}
 	});
 });

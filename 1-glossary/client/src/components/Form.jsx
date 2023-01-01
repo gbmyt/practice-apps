@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+const handleError = require('../../../utils/error-handler').handleError;
 
 const Form = ({ fetchGlossary }) => {
 
 	// save new term to database and re-render glossary list
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		const formObj = document.getElementById('addTermForm');
 
 		let newTerm = {
 			name: e.target.querySelector('#addTermWordInput').value || '',
@@ -19,29 +18,9 @@ const Form = ({ fetchGlossary }) => {
 
 		try {
 			await axios.post('/create', { newTerm });
-			formObj.reset();
+			document.getElementById('addTermForm').reset();
 		} catch (err) {
-			const error = Object.values(err);
-
-			if (error[2]['data']) {
-				const errType = error[2]['data'];
-				console.log('Error Type', errType);
-
-				switch (errType) {
-					case 'Duplicate Word Error':
-						alert('Whoops! This word can only be added to glossary once. Try again. 😬');
-						break;
-					case 'Name is required.':
-						alert('Whoops! Field: Name is required. Please adjust and try again. 😬');
-						break;
-					case 'Definition is required.':
-						alert('Whoops! Field: Definition is required. Please adjust and try again. 😬');
-						break;
-
-					default:
-						alert('Sorry, there was a problem saving to glossary 😬');
-				}
-			}
+			handleError(err);
 		}
 		fetchGlossary();
 	};
@@ -51,7 +30,7 @@ const Form = ({ fetchGlossary }) => {
 			<h3>Add A Word</h3>
 			<form className="flex-parent" id="addTermForm" onSubmit={handleSubmit}>
 				<div className="flex-child">
-					{/* <label htmlFor="name">Name</label> */}
+
 					<input
 						type="text"
 						name="name"
@@ -59,7 +38,7 @@ const Form = ({ fetchGlossary }) => {
 						placeholder="Type a word"
 					/>
 
-					{/* <label htmlFor="definition">Definition</label> */}
+
 					<input
 						type="text"
 						name="definition"
@@ -67,7 +46,7 @@ const Form = ({ fetchGlossary }) => {
 						placeholder="Tell us what it means"
 					/>
 
-					{/* <label htmlFor="example">Example</label> */}
+
 					<input
 						type="text"
 						name="example"
@@ -75,7 +54,7 @@ const Form = ({ fetchGlossary }) => {
 						placeholder="Use it in a sentence"
 					/>
 
-					{/* <label htmlFor="pronunciation">Pronunciation</label> */}
+
 					<input
 						type="text"
 						name="pronunciation"
@@ -83,7 +62,7 @@ const Form = ({ fetchGlossary }) => {
 						placeholder="How is it pronounced?"
 					/>
 
-					{/* <label htmlFor="word-type">Word Type</label> */}
+
 					<select id="addTermTypeInput" name="word-type">
 						<option value="">Word Type</option>
 						<option value="noun">noun</option>

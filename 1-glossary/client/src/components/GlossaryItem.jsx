@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+const handleError = require('../../../utils/error-handler').handleError;
+
 // =========================================================
 //	TO-DO: Add word type to glossary item (noun, adj, etc)
 // =========================================================
@@ -22,15 +24,19 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 		}
 	}, []);
 
+	useEffect(() => {
+		if (editMode === true) {
+			console.log('Pre', editMode);
+		}
+	}, [editMode]);
+
   const deleteWord = async () => {
     await axios.post(`/delete/${word._id}`);
 		fetchGlossary();
   };
 
-  const updateWord = async (e) => {
-		setEditMode(!editMode);
-
-		if (editMode) {
+  const handleUpdate = async (e) => {
+		if(editMode) {
 			const newWord = {
 				id: word._id,
 				name: document.getElementById('editTermWordInput').value,
@@ -40,13 +46,37 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 				example: document.getElementById('editTermExInput').value
 			};
 
-			axios.post(`/update/${word._id}`, { newWord })
-			.then(() => {
+			try {
+				await axios.post(`/update/${word._id}`, { newWord });
+				await setEditMode(!editMode);
+			} catch (err) {
+				handleError(err);
+				// const error = Object.values(err);
+
+				// if (error[2]['data']) {
+				// 	const errType = error[2]['data'];
+				// 	console.log('Error Type', errType);
+
+				// 	switch (errType) {
+				// 		case 'Duplicate Word Error':
+				// 			alert('Whoops! This word can only be added to glossary once. Try again. 😬');
+				// 			break;
+				// 		case 'Name is required.':
+				// 			alert('Whoops! Field: Name is required. Please adjust and try again. 😬');
+				// 			break;
+				// 		case 'Definition is required.':
+				// 			alert('Whoops! Field: Definition is required. Please adjust and try again. 😬');
+				// 			break;
+
+				// 		default:
+				// 			alert('Sorry, there was a problem updating 😬');
+				// 	}
+				// }
+			} finally {
 				fetchGlossary();
-			})
-			.catch(err => {
-				console.log(err);
-			});
+			}
+		} else if (!editMode) {
+			await setEditMode(!editMode);
 		}
   };
 
@@ -137,7 +167,7 @@ const GlossaryItem = ({ word, words, fetchGlossary }) => {
 			}
 
       <div>
-				<button onClick={updateWord}>{ editMode ? 'Save' : 'Edit' }</button>
+				<button onClick={handleUpdate}>{ editMode ? 'Save' : 'Edit' }</button>
         <button onClick={deleteWord}>Delete</button>
       </div>
     </div>
