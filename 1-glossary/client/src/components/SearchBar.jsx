@@ -10,7 +10,7 @@ const SearchBar = ({ onSearch, searchTerm, setSearchTerm }) => {
 	return (
 		<div className="form">
 			<form id="searchForm" >
-				<label htmlFor="search">Search:</label>
+				<label htmlFor="search">Search 🔍</label>
 				<input
 					type="text"
 					name="search"
@@ -19,7 +19,7 @@ const SearchBar = ({ onSearch, searchTerm, setSearchTerm }) => {
 					value={searchTerm}
 					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
-				{/* <input type='submit' className='submitBtn' value='🔍' onClick={search} /> */}
+				{/* <input type='submit' className='submit-search-btn' value='🔍' onClick={search} /> */}
 			</form>
 		</div>
 	)

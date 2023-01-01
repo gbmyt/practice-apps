@@ -47,37 +47,43 @@ const Form = ({ fetchGlossary }) => {
 	};
 
 	return (
-		<div id='addForm'>
-			<h3>Add A Word?</h3>
+		<div className='container'>
+			<h3>Add A Word</h3>
 			<form className="flex-parent" id="addTermForm" onSubmit={handleSubmit}>
 				<div className="flex-child">
+					{/* <label htmlFor="name">Name</label> */}
 					<input
 						type="text"
 						name="name"
 						id="addTermWordInput"
 						placeholder="Type a word"
 					/>
-				</div>
 
-				<div className="flex-child">
+					{/* <label htmlFor="definition">Definition</label> */}
 					<input
 						type="text"
 						name="definition"
 						id="addTermDefInput"
 						placeholder="Tell us what it means"
 					/>
-				</div>
 
-				<div className="flex-child">
+					{/* <label htmlFor="example">Example</label> */}
 					<input
 						type="text"
 						name="example"
 						id="addTermExInput"
 						placeholder="Use it in a sentence"
 					/>
-				</div>
 
-				<div className="flex-child">
+					{/* <label htmlFor="pronunciation">Pronunciation</label> */}
+					<input
+						type="text"
+						name="pronunciation"
+						id="addTermPronunciationInput"
+						placeholder="How is it pronounced?"
+					/>
+
+					{/* <label htmlFor="word-type">Word Type</label> */}
 					<select id="addTermTypeInput" name="word-type">
 						<option value="">Word Type</option>
 						<option value="noun">noun</option>
@@ -85,15 +91,6 @@ const Form = ({ fetchGlossary }) => {
 						<option value="adverb">adverb</option>
 						<option value="adjective">adjective</option>
 					</select>
-				</div>
-
-				<div className="flex-child">
-					<input
-						type="text"
-						name="pronunciation"
-						id="addTermPronunciationInput"
-						placeholder="How is it pronounced?"
-					/>
 				</div>
 
 				<button type="submit" id="save-word-btn">Save Word</button>

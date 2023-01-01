@@ -63,20 +63,13 @@ main {
 
 /*
 ============================
-      Custom Styles
-============================
-
-============================
-         To-Dos:
-     Add Form styling
- Put button on its own line,
-Wrap/nowrap for form fields?
+      CUSTOM STYLES
 ============================
 */
 
 /*
 ============================
-         Universal
+        Mixed Styles
 ============================
 */
 
@@ -86,16 +79,21 @@ ul {
   margin: 0;
 }
 
-#addForm,
+.container,
 .glossary > h2,
 .glossary-item,
 #searchForm {
   margin: 0 auto;
-  max-width: 1000px;
   border-radius: 15px;
 }
 
-#addForm,
+.glossary > h2,
+.glossary-item,
+#searchForm {
+  max-width: 1000px;
+}
+
+.container,
 .glossary > h2,
 #searchForm {
   text-align: center;
@@ -109,19 +107,20 @@ ul {
 .flex-parent {
   display: flex;
   align-items: center;
+
+}
+
+form.flex-parent {
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* .flex-child {
   border: 1px solid lime;
-  justify-content: center;
   align-content: center;
   text-align: center;
 } */
 
-#addTermForm {
-  justify-content: center;
-  flex-wrap: wrap;
-}
 
 /*
 ============================
@@ -137,12 +136,17 @@ ul {
   min-width: 375px;
 }
 
-.submitBtn {
+.submit-search-btn {
   width: 4rem;
 }
 
 #search-msg {
   text-align: center;
+}
+
+input::placeholder {
+  font-style: italic;
+  padding: .5rem;
 }
 
 /*
@@ -151,13 +155,21 @@ ul {
 ============================
 */
 
-#addForm > h2 {
+.container {
+  max-width: 50%;
+}
+
+.container > h2 {
   margin-bottom: .5rem;
 }
 
 #addTermForm {
   align-items: center;
 }
+
+/*
+      Add Form Inputs
+*/
 
 input {
   margin: .2rem .75rem;
@@ -166,8 +178,7 @@ input {
 
 #addTermForm > .flex-child > input,
 #addTermTypeInput {
-  min-width: 15rem;
-  margin: 1rem;
+  margin: .5rem 1rem;
 }
 
 #addTermTypeInput {
@@ -176,14 +187,12 @@ input {
   text-align: center;
 }
 
-form > label {
-  margin-top: .5rem;
-}
-
 #addTermForm > #save-word-btn {
   border-radius: 13px;
-  height: 2rem;
-  width: auto;
+  height: auto;
+  width: 6.8rem;
+  padding: .125rem 0;
+  margin: .85rem 0 .35rem 0;
 }
 
 /*
@@ -206,7 +215,7 @@ form > label {
 ============================
 */
 
-.glossary-item, #addForm {
+.glossary-item {
   padding: 1rem;
   border: 1px solid silver;
 }
