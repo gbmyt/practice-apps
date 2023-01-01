@@ -48,7 +48,7 @@ const Form = ({ fetchGlossary }) => {
 
 	return (
 		<div id='addForm'>
-			<h2>Add New Word</h2>
+			<h3>Add A Word?</h3>
 			<form className="flex-parent" id="addTermForm" onSubmit={handleSubmit}>
 				<div className="flex-child">
 					<input

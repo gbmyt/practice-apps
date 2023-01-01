@@ -68,9 +68,10 @@ main {
 
 ============================
          To-Dos:
+     Add Form styling
+ Put button on its own line,
+Wrap/nowrap for form fields?
 ============================
-Search bar styling (flex)
-Glossary Item styling (flex)
 */
 
 /*
@@ -163,9 +164,16 @@ input {
   border-radius: 25px;
 }
 
-#addTermForm > .flex-child > input {
+#addTermForm > .flex-child > input,
+#addTermTypeInput {
   min-width: 15rem;
   margin: 1rem;
+}
+
+#addTermTypeInput {
+  border-radius: 13px;
+  padding: 0 1rem;
+  text-align: center;
 }
 
 form > label {
@@ -236,9 +244,4 @@ h5  {
 
 .pad-sides, .word-type, .pronunciation {
   margin-left: .32rem;
-}
-
-#addTermTypeInput {
-  border-radius: 13px;
-  padding: 0 1rem;
 }
