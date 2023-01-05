@@ -6,7 +6,7 @@
     "server-dev": "npx nodemon --watch server server/index.js",
     "react-babel": "babel client/src --out-dir client/dist --presets=@babel/preset-react --source-maps inline --watch",
     "client-dev": "npx webpack --watch",
-    "db-create": "mysql -u root -p -e 'CREATE DATABASE IF NOT EXISTS checkout'",
+    "db-start": "mysql -t -u root -p < ./schema.sql",
     "build": "npx webpack",
     "start": "node server/index.js"
   },

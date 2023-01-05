@@ -25,21 +25,22 @@ app.use(logger);
 // Serves up all static and generated assets in ../client/dist.
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"), (err) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send(err);
-		}
-	});
-});
+// Not sure what I was using this for
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../client/dist/index.html"), (err) => {
+// 		if (err) {
+// 			console.log(err);
+// 			res.status(500).send(err);
+// 		}
+// 	});
+// });
 
 app.post("/checkout", (req, res) => {
 	console.log('Validating Your Session...');
 
 	validateSession(req, res, (err, validated) => {
 		if (err) {
-			console.log('Checkout Error', err);
+			console.log('Session Validation Error', err);
 			res.status(500).send(err);
 		} else if (validated) {
 			const response = { ...req.body, Session: req.session_id };

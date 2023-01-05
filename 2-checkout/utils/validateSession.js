@@ -14,7 +14,7 @@ module.exports = (req, res, cb) => {
 
 				data.forEach(record => {
 					if (record.session === req.session_id) {
-						console.log('Sorry, Not Valid');
+						console.log('Sorry, Invalid Session.');
 						validated = false;
 					}
 				})
@@ -22,7 +22,7 @@ module.exports = (req, res, cb) => {
 				if (!validated) {
 					cb(null, false)
 				} else {
-					console.log('Validated!');
+					console.log('Congrats! Your Session Was Validated!');
 					cb(null, true);
 				}
 			}

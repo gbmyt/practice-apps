@@ -35,18 +35,19 @@ const App = () => {
 		BillingZip: ''
 	});
 
+	// =============================================
+	//                  TO-DO:
+	// 1.	Validation doesn't work on first render
+	// (when form fields haven't been changed yet)
+	//
+	// 2. notFirstRender isn't accurate. Its just a key count
+	//		for the response state object and breaks
+	// 		validation after the first Account page
+	// =============================================
 	const handleSubmit = (e) => {
+
 		if (!shouldRedirect) {
 			e.preventDefault();
-			// =============================================
-			//                  TO-DO:
-			// 1.	Validation doesn't work on first render
-			// (when form fields haven't been changed yet)
-			//
-			// 2. notFirstRender isn't accurate. Its just a key count
-			//		for the response state object and breaks
-			// 		validation after the first Account page
-			// =============================================
 			if (notFirstRender) {
         alert(`Whoops! ${invalidInput.join(', ')} ${invalidInput.length === 1 ? 'is' : 'are'} required. Please try again.`);
 			} else {
