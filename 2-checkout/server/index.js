@@ -35,6 +35,16 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 // 	});
 // });
 
+app.get('/account', (req, res) => {
+	res.send({ 200, 'Ok' });
+});
+app.get('/shipping', (req, res) => {
+	res.send({ 200, 'Ok' });
+});
+app.get('/confirmation', (req, res) => {
+	res.send({ 200, 'Ok' });
+});
+
 app.post("/checkout", (req, res) => {
 	console.log('Validating Your Session...');
 
