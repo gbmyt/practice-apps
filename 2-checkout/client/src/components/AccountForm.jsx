@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import ConditionalLink from './ConditionalLink.jsx';
-const validateFormInput = require('../../../utils/validateFormInput').validateFormInput;
-const handleError = require('../../../utils/error-handler').handleError;
 
 // F1 collects name, email, and password for account creation.
 const AccountForm = ({
@@ -33,20 +31,15 @@ const AccountForm = ({
 	// =============================================
 	// 							CUSTOM HANDLERS
 	// =============================================
-	const handleClick = async (e) => {
+	const handleClick = (e) => {
 		try {
-			const form = document.getElementById('create-account');
-			const validatedForm = validateFormInput(form);
-
-			if (!validatedForm.validated) {
-				e.preventDefault();
-				handleError(validatedForm);
-			} else {
-				await axios.post('/account', { ...userDetails });
-				console.log('Account Details Submitted', response);
-			}
+			handleSubmit(e, {
+				name: 'create-account',
+				path: '/account',
+				payload: userDetails
+			});
 		} catch (err) {
-			console.log('There was a problem submitting account details\n', err);
+			console.log('Account Post Error', err);
 		}
 	};
 

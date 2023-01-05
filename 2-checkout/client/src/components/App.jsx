@@ -8,6 +8,7 @@ import ShippingForm from "./ShippingForm.jsx";
 import PaymentForm from "./PaymentForm.jsx";
 import Confirmation from "./Confirmation.jsx";
 
+const handleError = require('../../../utils/error-handler').handleError;
 const validateFormInput = require('../../../utils/validateFormInput').validateFormInput;
 
 const App = () => {
@@ -46,16 +47,20 @@ const App = () => {
 	//		for the response state object and breaks
 	// 		validation after the first Account page
 	// =============================================
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e, form) => {
+		try {
+			const validatedForm = validateFormInput(document.getElementById(form.name));
 
-		// if (!shouldRedirect) {
-		// 	e.preventDefault();
-		// 	if (notFirstRender) {
-    //     alert(`Whoops! ${invalidInput.join(', ')} ${invalidInput.length === 1 ? 'is' : 'are'} required. Please try again.`);
-		// 	} else {
-		// 		alert('All fields are required. Please try again.');
-		// 	}
-		// }
+			if (!validatedForm.validated) {
+				e.preventDefault();
+				handleError(validatedForm);
+			} else {
+				await axios.post(`${form.path}`, { ...form.payload });
+				console.log('Account Details Submitted', response);
+			}
+		} catch (err) {
+			console.log('There was a problem submitting account details\n', err);
+		}
   };
 
   return (
