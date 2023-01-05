@@ -56,11 +56,11 @@ const App = () => {
 				handleError(validatedForm);
 			} else {
 				await axios.post(`${form.path}`, { ...form.payload });
-				console.log('Account Details Submitted', response);
 			}
 		} catch (err) {
 			console.log('There was a problem submitting account details\n', err);
 		}
+		console.log(`${form.name} Details Submitted`, response);
   };
 
   return (

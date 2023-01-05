@@ -8,9 +8,9 @@ const validateFormInput = (form) => {
 		formFields.forEach(field => {
 			if (!field.value.length) {
 				let fieldName = field.name[0].toUpperCase().concat(field.name.slice(1));
-				console.log('Missing Required Field:', fieldName);
 
-				if(!["AddrTwo", "Phone"].includes(field)) {
+				if(!["Addr2", "Phone"].includes(fieldName)) {
+					console.log('Missing Required Field:', fieldName);
 					invalidFields.push(fieldName);
 				}
 			}

@@ -41,9 +41,16 @@ const ShippingForm = ({
     setResponse(prev => ({...prev, ...shippingDetails }));
   };
 
-  const handleClick = async () => {
-		await axios.post('/shipping', { ...shippingDetails });
-		console.log('Clicked', response);
+  const handleClick = (e) => {
+    try {
+			handleSubmit(e, {
+				name: 'shipping-info',
+				path: '/shipping',
+				payload: shippingDetails
+			});
+		} catch (err) {
+			console.log('Shipping Post Error', err);
+		}
 	};
 
 	return (

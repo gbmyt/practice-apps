@@ -39,9 +39,16 @@ const PaymentForm = ({
     setResponse(prev => ({ ...prev, ...paymentInfo }));
   };
 
-  const handleClick = async (e) => {
-    await axios.post('/payment', { ...paymentDetails });
-    console.log('Clicked', response);
+  const handleClick = (e) => {
+    try {
+			handleSubmit(e, {
+				name: 'payment-info',
+				path: '/payment',
+				payload: paymentDetails
+			});
+		} catch (err) {
+			console.log('Payment Post Error', err);
+		}
   };
 
   return (
