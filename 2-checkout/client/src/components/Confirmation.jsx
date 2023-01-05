@@ -6,9 +6,10 @@ const Confirmation = ({ response }) => {
 	const handleClick = async () => {
 		try {
 			await axios.post('/checkout', { ...response });
+			alert('Thank you for shopping with us! You\'ll receive email confirmation shortly.');
 		} catch (err) {
 			if (err.response.data === "Invalid Session") {
-				alert('You can only place an order once. Please check your email for confirmation details. Thanks for shopping with us!');
+				alert('Whoops! You\'re trying to place a duplicate order. Please check your email for confirmation & order details.');
 			}
 			console.log(err);
 		}
