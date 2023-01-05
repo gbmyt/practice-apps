@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
+
 import ConditionalLink from './ConditionalLink.jsx';
 
 // F3 collects credit card #, expiry date, CVV, and billing zip code.
@@ -6,6 +8,8 @@ const PaymentForm = ({
 	response,
 	formFields,
 	setFormFields,
+  paymentDetails,
+  setPaymentDetails,
 	invalidInput,
   notFirstRender,
 	setResponse,
@@ -31,7 +35,13 @@ const PaymentForm = ({
       BillingZip: document.getElementById('billing-zip').value
     }
     setFormFields(prev => ({ ...prev, ...paymentInfo }));
+    setPaymentDetails(prev => ({ ...prev, ...paymentInfo }));
     setResponse(prev => ({ ...prev, ...paymentInfo }));
+  };
+
+  const handleClick = async (e) => {
+    await axios.post('/payment', { ...paymentDetails });
+    console.log('Clicked', response);
   };
 
   return (
@@ -79,7 +89,7 @@ const PaymentForm = ({
       />
 
       <ConditionalLink to='/confirmation' condition={shouldRedirect}>
-				<button onClick={handleSubmit}>Next</button>
+				<button onClick={handleClick}>Next</button>
 			</ConditionalLink>
 		</form>
 	)

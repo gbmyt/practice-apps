@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 import ConditionalLink from './ConditionalLink.jsx';
+const validateFormInput = require('../../../utils/validateFormInput').validateFormInput;
+const handleError = require('../../../utils/error-handler').handleError;
 
 // F1 collects name, email, and password for account creation.
 const AccountForm = ({
 	response,
 	formFields,
 	setFormFields,
+	userDetails,
+	setUserDetails,
 	invalidInput,
   notFirstRender,
 	setResponse,
@@ -27,6 +33,23 @@ const AccountForm = ({
 	// =============================================
 	// 							CUSTOM HANDLERS
 	// =============================================
+	const handleClick = async (e) => {
+		try {
+			const form = document.getElementById('create-account');
+			const validatedForm = validateFormInput(form);
+
+			if (!validatedForm.validated) {
+				e.preventDefault();
+				handleError(validatedForm);
+			} else {
+				await axios.post('/account', { ...userDetails });
+				console.log('Account Details Submitted', response);
+			}
+		} catch (err) {
+			console.log('There was a problem submitting account details\n', err);
+		}
+	};
+
 	const handleChange = () => {
 		const user = {
 			Username: document.getElementById('username').value,
@@ -34,6 +57,7 @@ const AccountForm = ({
 			Email: document.getElementById('email').value
 		}
 		setFormFields(prev => ({ ...prev, ...user }));
+		setUserDetails(prev => ({ ...prev, ...user }));
 		setResponse(prev => ({ ...prev, ...user }));
 	};
 
@@ -72,7 +96,7 @@ const AccountForm = ({
 			></input>
 
 			<ConditionalLink to='/shipping' condition={shouldRedirect}>
-				<button onClick={handleSubmit}>Next</button>
+				<button onClick={handleClick}>Next</button>
 			</ConditionalLink>
 		</form>
 	)

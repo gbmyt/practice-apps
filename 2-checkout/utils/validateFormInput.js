@@ -1,14 +1,26 @@
 const validateFormInput = (form) => {
-	let fields = [];
+	let invalidFields = [];
+	let formFields = form.querySelectorAll('input');
+	// console.log('Form Obj', formFields);
+	// console.log('Form Obj', formFields[2].value.length);
 
-	Object.keys(form).forEach(field => {
-		if (!form[field].trim()) {
-			if(!["AddrTwo", "Phone"].includes(field)) {
-				fields.push(field);
+	if (formFields.length) {
+		formFields.forEach(field => {
+			if (!field.value.length) {
+				let fieldName = field.name[0].toUpperCase().concat(field.name.slice(1));
+				console.log('Missing Required Field:', fieldName);
+
+				if(!["AddrTwo", "Phone"].includes(field)) {
+					invalidFields.push(fieldName);
+				}
 			}
-		}
-	});
-	return fields.length > 0 ? fields : null;
+		})
+	} else {
+		console.log('Sorry, Can\'t Find Any Fields to Validate');
+	}
+
+	// console.log('Invalid Fields', invalidFields, invalidFields.length);
+	return invalidFields.length === 0 ? { validated: true } : { validated: false, invalidFields };
 };
 
 module.exports.validateFormInput = validateFormInput;

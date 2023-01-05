@@ -13,8 +13,10 @@ const validateFormInput = require('../../../utils/validateFormInput').validateFo
 const App = () => {
 	const [shouldRedirect, setShouldRedirect] = useState(false);
 	const [formFields, setFormFields] = useState({});
+	const [userDetails, setUserDetails] = useState({});
+	const [shippingDetails, setShippingDetails] = useState({});
+	const [paymentDetails, setPaymentDetails] = useState({});
 	const notFirstRender = Object.keys(formFields).length;
-	const invalidInput = validateFormInput(formFields);
 
 	const [response, setResponse] = useState({
 		Username: '',
@@ -46,14 +48,14 @@ const App = () => {
 	// =============================================
 	const handleSubmit = (e) => {
 
-		if (!shouldRedirect) {
-			e.preventDefault();
-			if (notFirstRender) {
-        alert(`Whoops! ${invalidInput.join(', ')} ${invalidInput.length === 1 ? 'is' : 'are'} required. Please try again.`);
-			} else {
-				alert('All fields are required. Please try again.');
-			}
-		}
+		// if (!shouldRedirect) {
+		// 	e.preventDefault();
+		// 	if (notFirstRender) {
+    //     alert(`Whoops! ${invalidInput.join(', ')} ${invalidInput.length === 1 ? 'is' : 'are'} required. Please try again.`);
+		// 	} else {
+		// 		alert('All fields are required. Please try again.');
+		// 	}
+		// }
   };
 
   return (
@@ -67,7 +69,8 @@ const App = () => {
 							response={response}
 							formFields={formFields}
 							setFormFields={setFormFields}
-							invalidInput={invalidInput}
+							userDetails={userDetails}
+							setUserDetails={setUserDetails}
 							notFirstRender={notFirstRender}
 
 							setResponse={setResponse}
@@ -85,7 +88,8 @@ const App = () => {
 							response={response}
 							formFields={formFields}
 							setFormFields={setFormFields}
-							invalidInput={invalidInput}
+							shippingDetails={shippingDetails}
+							setShippingDetails={setShippingDetails}
 							notFirstRender={notFirstRender}
 
 							setResponse={setResponse}
@@ -103,7 +107,8 @@ const App = () => {
 							response={response}
 							formFields={formFields}
 							setFormFields={setFormFields}
-							invalidInput={invalidInput}
+							paymentDetails={paymentDetails}
+							setPaymentDetails={setPaymentDetails}
 							notFirstRender={notFirstRender}
 
 							setResponse={setResponse}
