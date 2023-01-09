@@ -10,7 +10,7 @@ const Confirmation = ({ response }) => {
 			await axios.post('/checkout', { ...response });
 			alert('Thank you for shopping with us! You\'ll receive email confirmation shortly.');
 		} catch (err) {
-			console.log('Submit Error', err.response.data.errno);
+			console.log('Submit Error', err.response.data);
 			handleError(err);
 		}
 	};

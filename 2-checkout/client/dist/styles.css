@@ -58,3 +58,55 @@
 	 padding: 16px;
 	 margin: auto;
  }
+
+/* =============================================
+								CUSTOM STYLES:
+============================================= */
+
+/* =============================================
+									Universal:
+============================================= */
+
+.custom-component {
+	border: 1px solid silver;
+	margin: 2rem;
+	padding: 0.5rem;
+}
+
+/* =============================================
+									Buttons:
+============================================= */
+a, a:link, a:active, a:visited, a:hover, a::after, a::before {
+	text-decoration: none;
+	color: white;
+}
+
+#home-button {
+	margin: 1rem 0;
+}
+
+button, input[type="submit"], input[type="reset"] {
+	background-color: aquamarine;
+	color: inherit;
+	border-radius: 10px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+/* =============================================
+									Forms:
+============================================= */
+#create-account > label,
+#shipping-info > label,
+#payment-info > label {
+	display: block;
+}
+
+/* =============================================
+                  Summary:
+============================================= */
+
+#payment-confirmation {
+	font-style: italic;
+}

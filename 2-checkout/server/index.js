@@ -25,20 +25,6 @@ app.use(logger);
 // Serves up all static and generated assets in ../client/dist.
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-// Look up difference between doing this and app.get('/account')
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"), (err) => {
-		if (err) {
-			console.log(err);
-			res.status(500).send(err);
-		}
-	});
-});
-
-// app.get('/account', (req, res) => {
-// 	res.status(200).send('Got Account')
-// });
-
 app.post('/account', (req, res) => {
 	const { body } = req.body;
 	console.log('GOT Acct Body', req.body);
